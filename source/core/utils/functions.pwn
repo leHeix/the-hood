@@ -110,3 +110,49 @@ Chat_Clear(playerid = INVALID_PLAYER_ID, lines = 20)
 
     return 1;
 }
+
+levenshtein(const a[], const b[]) {
+    new
+        aLength = strlen(a),
+        bLength = strlen(b);
+
+    if(!aLength || !bLength)
+        return 0;
+
+    new
+        cache[256],
+        index = 0,
+        bIndex = 0,
+        distance,
+        bDistance,
+        result,
+        code;
+
+    while (index < aLength)
+    {
+        cache[index] = ++index;
+    }
+
+    while (bIndex < bLength) 
+    {
+        code = b[bIndex];
+        result = distance = bIndex++;
+        index = -1;
+
+        while (++index < aLength) 
+        {
+            bDistance = code == a[index] ? distance : distance + 1;
+            distance = cache[index];
+
+            cache[index] = result = distance > result
+            ? bDistance > result
+                ? result + 1
+                : bDistance
+            : bDistance > distance
+                ? distance + 1
+                : bDistance;
+        }
+    }
+
+    return result;
+}

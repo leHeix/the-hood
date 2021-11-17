@@ -61,6 +61,7 @@ L1:
 #include <Pawn.CMD>
 #include <a_mysql>
 #include <bcrypt>
+#include <md-sort/md-sort>
 
 #include <YSI_Coding\y_hooks>
 #include <YSI_Coding\y_inline>
@@ -73,7 +74,7 @@ L1:
 #include <YSI_Server\y_scriptinit>
 #include <YSI_Visual\y_dialog>
 
-DEFINE_HOOK_REPLACEMENT__(OnPlayer, OP)
+DEFINE_HOOK_REPLACEMENT__(OnPlayer, OP);
 
 // Fixes
 ///////////

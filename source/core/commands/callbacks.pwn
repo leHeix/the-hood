@@ -33,3 +33,46 @@ hook OnScriptInit()
 
     return 1;
 }
+
+hook OnPlayerCommandReceived(playerid, cmd[], params[], flags)
+{
+	/*
+		quick explanation:
+		our flag thing uses 3 bytes for the flags and 1 byte for the level (4 bytes, a cell)
+
+		cell representation:
+			00000000 00000000 00000000 00000000
+			-------- --------------------------
+		      level           flags
+	*/
+
+	new cmd_level = (flags >>> 24);
+
+	if(cmd_level != Player_Rank(playerid))
+		return 0;
+
+	if(!(flags & CMD_NO_COOLDOWN) && g_rgiPlayerCommandCooldown[playerid] + 1000 > GetTickCount())
+	{
+		SendClientMessage(playerid, 0xFFA02BFF, "Solo puedes enviar un comando por segundo. Algunos comandos no disponen de tiempo de espera.");
+		return 0;
+	}
+
+	g_rgiPlayerCommandCooldown[playerid] = GetTickCount();
+
+	return 1;
+}
+
+hook OnPlayerCmdPerformed(playerid, cmd[], params[], result, flags)
+{
+#if defined DEBUG_MODE
+    printf("OnPlayerCommandPerformed(%d, \"%s\", \"%s\", %d, %b)", playerid, cmd, params, result, flags);
+#endif
+
+	if(result == -1)
+	{
+		Commands_ShowSuggestions(playerid, cmd);
+		return 0;
+	}
+
+	return 1;
+}
