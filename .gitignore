@@ -1,0 +1,9 @@
+/logs
+server_log.txt
+*.exe
+*.dll
+/compiler/*
+!/compiler/include
+*.amx
+*.asm
+*.lst
