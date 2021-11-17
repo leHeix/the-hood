@@ -7,3 +7,5 @@ server_log.txt
 *.amx
 *.asm
 *.lst
+/scriptfiles/*
+!/scriptfiles/schema.sql

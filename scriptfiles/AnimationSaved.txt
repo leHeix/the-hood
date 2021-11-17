@@ -1,2 +1,0 @@
-
-ApplyAnimation(playerid, "CRIB", "PED_CONSOLE_LOOP", 4.1, true, false, false, false, 0, false); // loop_console
