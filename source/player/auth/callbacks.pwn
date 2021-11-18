@@ -350,7 +350,7 @@ hook OnPlayerClickTextDraw(playerid, Text:clickedid)
 					if(Player_Rank(playerid))
 						Iter_Add(Admins, playerid);
 
-					// Notification_Show(playerid, @f("Bienvenido a MongZone, %s. Tu última conexión fue el ~y~%s~w~.", Player_GetName(playerid), Player_GetLastConnection(playerid)));
+					Notification_Show(playerid, @f("Bienvenido a The Hood, %s. Tu última conexión fue el ~y~%s~w~.", Player_GetName(playerid), Player_GetLastConnection(playerid)));
 				
                     Needs_ToggleBar(playerid, true);
                     Needs_StartUpdating(playerid);

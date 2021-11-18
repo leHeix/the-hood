@@ -13,6 +13,12 @@ Commands_GetFreeIndex()
         }
     }
     
+    printf("[Commands] Store out of space");
+
+    // Crash the server deliberately.
+    // The "exit" RCON command can still continue executing code until the current callback execution stops.
+    #emit jump cellmax
+    
     return -1;
 }
 

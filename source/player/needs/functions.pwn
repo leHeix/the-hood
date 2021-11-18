@@ -71,6 +71,8 @@ Needs_UpdateTextDraws(playerid, bool:show = false)
     if(hunger_coords < hunger_full)
         hunger_coords = hunger_full;
 
+    // The AMX is single-threaded. This can, technically, never fail. (?)
+    // Though it's really bad, it's the only way I've found around our textdraw order issue.
     TextDrawTextSize(g_tdNeedProgress[0], hunger_coords, 0.0);
     TextDrawTextSize(g_tdNeedProgress[1], thirst_coords, 0.0);
 

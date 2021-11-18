@@ -3,6 +3,8 @@
 #pragma semicolon 1
 #pragma warning disable 239 // fuck off
 
+#define PP_SYNTAX_@
+#define PP_SYNTAX_STRING_OP
 #define YSI_NO_OBNOXIOUS_HEADER
 #define YSI_NO_ANDROID_CHECK
 #define YSI_NO_VERSION_CHECK
@@ -56,12 +58,14 @@ L1:
 
 #include <jit>
 #include <YSF>
+#include <PawnPlus>
 #include <streamer>
 #include <sscanf2>
 #include <Pawn.CMD>
 #include <a_mysql>
 #include <bcrypt>
 #include <md-sort/md-sort>
+#include <td-string-width>
 
 #include <YSI_Coding\y_hooks>
 #include <YSI_Coding\y_inline>
@@ -90,6 +94,8 @@ DEFINE_HOOK_REPLACEMENT__(OnPlayer, OP);
 #include "core/commands/header.pwn"
 #include "server/database/header.pwn"
 #include "server/textdraws/header.pwn"
+#include "server/notifications/header.pwn"
+#include "server/enter_exits/header.pwn"
 #include "player/account/header.pwn"
 #include "player/needs/header.pwn"
 #include "player/auth/header.pwn"
@@ -101,6 +107,8 @@ DEFINE_HOOK_REPLACEMENT__(OnPlayer, OP);
 #include "core/transitions/functions.pwn"
 #include "core/timers/functions.pwn"
 #include "core/commands/functions.pwn"
+#include "server/notifications/functions.pwn"
+#include "server/enter_exits/functions.pwn"
 #include "player/account/functions.pwn"
 #include "player/needs/functions.pwn"
 #include "player/auth/functions.pwn"
@@ -113,9 +121,15 @@ DEFINE_HOOK_REPLACEMENT__(OnPlayer, OP);
 #include "core/commands/callbacks.pwn"
 #include "server/database/callbacks.pwn"
 #include "server/textdraws/callbacks.pwn"
+#include "server/notifications/callbacks.pwn"
+#include "server/enter_exits/callbacks.pwn"
 #include "player/account/callbacks.pwn"
 #include "player/needs/callbacks.pwn"
 #include "player/auth/callbacks.pwn"
+
+// Commands
+//////////////
+#include "player/needs/commands.pwn"
 
 public OnGameModeInit()
 {
@@ -220,3 +234,10 @@ CMD:goto(playerid, const params[])
     return 1;
 }
 #endif
+
+CMD:desbug(playerid, const params[])
+{
+    SetPlayerVirtualWorld(playerid, 0);
+    SetPlayerInterior(playerid, 0);
+    return 1;
+}

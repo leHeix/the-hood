@@ -5,10 +5,10 @@
 
 static RunTransitionCallback(playerid, count, bool:in, task_count, bool:task_in)
 {
-	if(GetPVarType(playerid, !"transition_callback") != PLAYER_VARTYPE_NONE && in == task_in && count == task_count)
+	if(p_rgeTransitionData[playerid][e_iTransitionCallback] != Func:0<> && in == task_in && count == task_count)
 	{
-		new fun = GetPVarInt(playerid, !"transition_callback");
-		DeletePVar(playerid, !"transition_callback");
+		new Func:fun<> = p_rgeTransitionData[playerid][e_iTransitionCallback];
+		p_rgeTransitionData[playerid][e_iTransitionCallback] = Func:0<>;
 
 		@.fun();
 
@@ -29,9 +29,9 @@ public TRANSITION_Process(playerid, bool:in, task_count, bool:task_in)
 
 		if(count >= 260)
 		{
-			KillTimer(GetPVarInt(playerid, !"transition_timer"));
-			SetPVarInt(playerid, !"transition_in", false);
-			SetPVarInt(playerid, !"transition_timer", SetTimerEx(!"TRANSITION_Process", 30, true, "iiii", playerid, false, task_count, task_in));
+			KillTimer(p_rgeTransitionData[playerid][e_iTransitionTimer]);
+			p_rgeTransitionData[playerid][e_bTransitionIn] = true;
+			p_rgeTransitionData[playerid][e_iTransitionTimer] = SetTimerEx(!"TRANSITION_Process", 30, true, "iiii", playerid, false, task_count, task_in);
 		}
 	}
 	else

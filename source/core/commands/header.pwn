@@ -29,7 +29,6 @@ new g_rgiPlayerCommandCooldown[MAX_PLAYERS];
     forward mz@cmd_%0();\
     public mz@cmd_%0() {\
         new id = Commands_GetFreeIndex();\
-        if(id == -1) { print("[Commands] Failed to register command \""#%0"\" (store out of space)"); return 0;}\
         g_rgeCommandStore[id][e_iCommandNameHash] = _I<%0>;\
         strcat(g_rgeCommandStore[id][e_szCommandDescription], %3);\
         return 1;\

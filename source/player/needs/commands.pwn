@@ -6,12 +6,12 @@
 command set_needs(playerid, const params[], "Asigna las necesidades de un jugador.")
 {
     new dest_player, Float:hunger, Float:thirst;
-    if(sscanf("rF(-1.0)F(-1.0)", dest_player, hunger, thirst))
+    if(sscanf(params, "rF(-1.0)F(-1.0)", dest_player, hunger, thirst))
     {
         return SendClientMessage(playerid, 0xDADADAFF, "USO: /{ED2B2B}set_needs {DADADA}<usuario> {969696}[hambre] [sed]");
     }
 
-    new message[144];
+    new message[120];
     format(message, sizeof(message), "{ED2B2B}› {DADADA}Se le asignó a {ED2B2B}%s{DADADA}", Player_GetName(playerid));
 
     if(hunger >= 0.0)
@@ -26,6 +26,8 @@ command set_needs(playerid, const params[], "Asigna las necesidades de un jugado
         Player_Thirst(dest_player) = thirst;
     }
 
+    Needs_UpdateTextDraws(playerid, true);
     SendClientMessage(playerid, -1, message);
+    return 1;
 }
-flags:set_needs(CMD_ADMIN<RANK_LEVEL_MODERATOR>);
+flags:set_needs(CMD_ADMIN<RANK_LEVEL_MODERATOR>)

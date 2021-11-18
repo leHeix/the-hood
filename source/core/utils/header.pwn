@@ -5,4 +5,8 @@
 
 enum {
 	VW_PLAYER = 1
-}
+};
+
+native PlayerTextDrawSetString_s(playerid, PlayerText:text, ConstAmxString:string) = PlayerTextDrawSetString;
+
+#define @f str_format
