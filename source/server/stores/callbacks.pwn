@@ -107,8 +107,6 @@ hook OnPlayerClickTextDraw(playerid, Text:clickedid)
 
             Bit_Set(Player_Flags(playerid), PFLAG_CAN_USE_SHOP_BUTTONS, false);
 
-            MovePlayerObject(playerid, g_rgiPlayerShopObject[playerid], g_rgeShops[shop_id][e_fShopObjectEndX], g_rgeShops[shop_id][e_fShopObjectEndY], g_rgeShops[shop_id][e_fShopObjectEndZ], 1.2);
-
             --g_rgiPlayerCurrentItem[playerid];
 
             inline const MovingDone()
@@ -122,7 +120,7 @@ hook OnPlayerClickTextDraw(playerid, Text:clickedid)
                 TextDrawSetStringForPlayer(g_tdShops[10], playerid, va_return("$%d", g_rgeShopItems[shop_id][g_rgiPlayerCurrentItem[playerid]][e_iItemPrice]));
                 TextDrawSetStringForPlayer(g_tdShops[11], playerid, Str_FixEncoding(g_rgeShopItems[shop_id][g_rgiPlayerCurrentItem[playerid]][e_szItemName]));
             }
-            PlayerTimer_Start(playerid, 1000, false, using inline MovingDone);
+            cb_MovePlayerObject(using inline MovingDone, playerid, g_rgiPlayerShopObject[playerid], g_rgeShops[shop_id][e_fShopObjectEndX], g_rgeShops[shop_id][e_fShopObjectEndY], g_rgeShops[shop_id][e_fShopObjectEndZ], 1.2);
 
             return ~1;
         }
@@ -133,8 +131,6 @@ hook OnPlayerClickTextDraw(playerid, Text:clickedid)
                 return ~1;
 
             Bit_Set(Player_Flags(playerid), PFLAG_CAN_USE_SHOP_BUTTONS, false);
-
-            MovePlayerObject(playerid, g_rgiPlayerShopObject[playerid], g_rgeShops[shop_id][e_fShopObjectEndX], g_rgeShops[shop_id][e_fShopObjectEndY], g_rgeShops[shop_id][e_fShopObjectEndZ], 1.2);
 
             ++g_rgiPlayerCurrentItem[playerid];
 
@@ -149,7 +145,7 @@ hook OnPlayerClickTextDraw(playerid, Text:clickedid)
                 TextDrawSetStringForPlayer(g_tdShops[10], playerid, va_return("$%d", g_rgeShopItems[shop_id][g_rgiPlayerCurrentItem[playerid]][e_iItemPrice]));
                 TextDrawSetStringForPlayer(g_tdShops[11], playerid, Str_FixEncoding(g_rgeShopItems[shop_id][g_rgiPlayerCurrentItem[playerid]][e_szItemName]));
             }
-            PlayerTimer_Start(playerid, 1000, false, using inline MovingDone);
+            cb_MovePlayerObject(using inline MovingDone, playerid, g_rgiPlayerShopObject[playerid], g_rgeShops[shop_id][e_fShopObjectEndX], g_rgeShops[shop_id][e_fShopObjectEndY], g_rgeShops[shop_id][e_fShopObjectEndZ], 1.2);
 
             return ~1;
         }

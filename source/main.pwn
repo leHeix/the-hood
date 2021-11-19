@@ -72,8 +72,9 @@ L1:
 #include <YSI_Coding\y_stringhash>
 #include <YSI_Coding\y_va>
 #include <YSI_Core\y_utils>
-#include <YSI_Data\y_iterate>
 #include <YSI_Data\y_bit>
+#include <YSI_Data\y_iterate>
+#include <YSI_Data\y_sparsearray>
 #include <YSI_Extra\y_inline_mysql>
 #include <YSI_Server\y_scriptinit>
 #include <YSI_Visual\y_dialog>
@@ -84,6 +85,7 @@ DEFINE_HOOK_REPLACEMENT__(OnPlayer, OP);
 ///////////
 #include "core/fixes/textdraws.pwn"
 #include "core/utils/bcrypt_inline.pwn"
+#include "core/utils/objects_inline.pwn"
 
 // Headers
 /////////////
