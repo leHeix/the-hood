@@ -140,11 +140,11 @@ Player_LoadData(playerid)
     cache_get_value_name_int(0, !"AGE", Player_Age(playerid));
     cache_get_value_name_int(0, !"MONEY", Player_Money(playerid));
     cache_get_value_name_float(0, !"HEALTH", Player_Health(playerid));
-    cache_get_value_name_float(0, !"ARMOR", Player_Armour(playerid));
+    cache_get_value_name_float(0, !"ARMOUR", Player_Armour(playerid));
     cache_get_value_name_float(0, !"POS_X", g_rgePlayerData[playerid][e_fSpawnPosX]);
     cache_get_value_name_float(0, !"POS_Y", g_rgePlayerData[playerid][e_fSpawnPosY]);
     cache_get_value_name_float(0, !"POS_Z", g_rgePlayerData[playerid][e_fSpawnPosZ]);
-    cache_get_value_name_float(0, !"POS_ANGLE", g_rgePlayerData[playerid][e_fSpawnPosAngle]);
+    cache_get_value_name_float(0, !"ANGLE", g_rgePlayerData[playerid][e_fSpawnPosAngle]);
     cache_get_value_name_int(0, !"VW", Player_VirtualWorld(playerid));
     cache_get_value_name_int(0, !"INTERIOR", Player_Interior(playerid));
     cache_get_value_name(0, !"LAST_CONNECTION", Player_GetLastConnection(playerid));

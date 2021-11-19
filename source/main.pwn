@@ -96,6 +96,7 @@ DEFINE_HOOK_REPLACEMENT__(OnPlayer, OP);
 #include "server/textdraws/header.pwn"
 #include "server/notifications/header.pwn"
 #include "server/enter_exits/header.pwn"
+#include "server/stores/header.pwn"
 #include "player/account/header.pwn"
 #include "player/needs/header.pwn"
 #include "player/auth/header.pwn"
@@ -109,6 +110,7 @@ DEFINE_HOOK_REPLACEMENT__(OnPlayer, OP);
 #include "core/commands/functions.pwn"
 #include "server/notifications/functions.pwn"
 #include "server/enter_exits/functions.pwn"
+#include "server/stores/functions.pwn"
 #include "player/account/functions.pwn"
 #include "player/needs/functions.pwn"
 #include "player/auth/functions.pwn"
@@ -123,6 +125,8 @@ DEFINE_HOOK_REPLACEMENT__(OnPlayer, OP);
 #include "server/textdraws/callbacks.pwn"
 #include "server/notifications/callbacks.pwn"
 #include "server/enter_exits/callbacks.pwn"
+#include "server/stores/callbacks.pwn"
+#include "server/stores/pizza/callbacks.pwn"
 #include "player/account/callbacks.pwn"
 #include "player/needs/callbacks.pwn"
 #include "player/auth/callbacks.pwn"
@@ -239,5 +243,31 @@ CMD:desbug(playerid, const params[])
 {
     SetPlayerVirtualWorld(playerid, 0);
     SetPlayerInterior(playerid, 0);
+    return 1;
+}
+
+CMD:create_n_edit(playerid, const params[])
+{
+    extract params -> new model, Float:x = 0.0, Float:y = 0.0, Float:z = 0.0, Float:rX = 0.0, Float:rY = 0.0, Float:rZ = 0.0; else return 1;
+
+    if(x == 0.0 && y == 0.0 && z == 0.0)
+    {
+        GetPlayerPos(playerid, x, y, z);
+    }
+
+    new o = CreateObject(model, x, y, z, rX, rY, rZ);
+    EditObject(playerid, o);
+
+    return 1;
+}
+
+public OnPlayerEditObject(playerid, playerobject, objectid, response, Float:fX, Float:fY, Float:fZ, Float:fRotX, Float:fRotY, Float:fRotZ )
+{
+    SendClientMessagef(playerid, -1, "X: %.2f", fX);
+    SendClientMessagef(playerid, -1, "Y: %.2f", fY);
+    SendClientMessagef(playerid, -1, "Z: %.2f", fZ);
+    SendClientMessagef(playerid, -1, "rX: %.2f", fRotX);
+    SendClientMessagef(playerid, -1, "rY: %.2f", fRotY);
+    SendClientMessagef(playerid, -1, "rZ: %.2f", fRotZ);
     return 1;
 }

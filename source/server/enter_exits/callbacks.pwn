@@ -51,11 +51,11 @@ hook OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 
                 if(info[2])
                 {
-                    Streamer_UpdateEx(playerid, g_rgeEnterExits[id][e_fExitX], g_rgeEnterExits[id][e_fExitY], g_rgeEnterExits[id][e_fExitZ], g_rgeEnterExits[id][e_iExitWorld], g_rgeEnterExits[id][e_iExitInterior]);
                     SetPlayerPos(playerid, g_rgeEnterExits[id][e_fExitX], g_rgeEnterExits[id][e_fExitY], g_rgeEnterExits[id][e_fExitZ]);
                     SetPlayerFacingAngle(playerid, g_rgeEnterExits[id][e_fExitAngle]);
                     SetPlayerInterior(playerid, g_rgeEnterExits[id][e_iExitInterior]);
                     SetPlayerVirtualWorld(playerid, g_rgeEnterExits[id][e_iExitWorld]);
+                    Streamer_Update(playerid);
                 }
                 else
                 {
@@ -64,6 +64,7 @@ hook OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
                     SetPlayerFacingAngle(playerid, g_rgeEnterExits[id][e_fEnterAngle]);
                     SetPlayerInterior(playerid, g_rgeEnterExits[id][e_iEnterInterior]);
                     SetPlayerVirtualWorld(playerid, g_rgeEnterExits[id][e_iEnterWorld]);
+                    Streamer_Update(playerid);
                 }
             }
         }
