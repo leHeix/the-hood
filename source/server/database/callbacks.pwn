@@ -43,3 +43,14 @@ hook OnGameModeExit()
     mysql_close(g_hDatabase);
     return 1;
 }
+
+public OnQueryError(errorid, const error[], const callback[], const query[], MySQL:handle)
+{
+    printf("[MySQL] Caught error while exeuting query on handle %d.", _:handle);
+    printf("[!] Error", error);
+    printf("[!] Callback: \"%s\"", callback);
+    print("[!] Query:");
+    printf("[!]    %s", query);
+
+    return 1;
+}

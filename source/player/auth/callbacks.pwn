@@ -354,6 +354,8 @@ hook OnPlayerClickTextDraw(playerid, Text:clickedid)
 				
                     Needs_ToggleBar(playerid, true);
                     Needs_StartUpdating(playerid);
+
+                    mysql_tquery(g_hDatabase, va_return("UPDATE `PLAYERS` SET `CURRENT_CONNECTION` = UNIX_TIMESTAMP() WHERE `ID` = %d LIMIT 1;", Player_AccountID(playerid)));
                 }
 				Transition_StartInline(using inline ScreenBlacked, playerid, 255, TRANSITION_IN);
 			}

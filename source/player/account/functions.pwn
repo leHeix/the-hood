@@ -67,8 +67,8 @@ Account_Save(playerid)
 				`POS_X` = %.2f, \
 				`POS_Y` = %.2f, \
 				`POS_Z` = %.2f, \
-				`POS_ANGLE` = %.2f, \
-				`VIRTUALWORLD` = %i, \
+				`ANGLE` = %.2f, \
+				`VW` = %i, \
 				`INTERIOR` = %i, \
 				`HUNGER` = %.2f, \
 				`THIRST` = %.2f, \
@@ -82,6 +82,7 @@ Account_Save(playerid)
 		Player_Skin(playerid),
 		Player_AccountID(playerid)
 	);
+    mysql_tquery(g_hDatabase, YSI_UNSAFE_HUGE_STRING);
 
 	return 1;
 }
@@ -160,4 +161,31 @@ Player_LoadData(playerid)
     cache_unset_active();
 
     return 1;
+}
+
+Player_Vomit(playerid)
+{
+    Bit_Set(Player_Flags(playerid), PFLAG_IS_PUKING, true);
+
+    new Float:x, Float:y, Float:z;
+    GetPlayerPos(playerid, x, y, z);
+    SetPlayerFacingAngle(playerid, 0.0);
+    ApplyAnimation(playerid, "FOOD", "EAT_VOMIT_P", 4.0, false, false, false, true, 0);
+    PlayerPlaySound(playerid, 1, 0.0, 0.0, 0.0);
+    PlayerPlaySound(playerid, 1169, 0.0, 0.0, 0.0);
+
+    inline const StartPuking()
+    {
+        new puke_obj = CreateObject(18722, x + 0.355, y - 0.116, z - 1.6, 0.0, 0.0, 0.0);
+
+        inline const AnimDone()
+        {
+            Bit_Set(Player_Flags(playerid), PFLAG_IS_PUKING, false);
+            DestroyObject(puke_obj);
+            ClearAnimations(playerid);
+            PlayerPlaySound(playerid, 0, 0.0, 0.0, 0.0);
+        }
+        PlayerTimer_Start(playerid, 3500, false, using inline AnimDone);
+    }
+    PlayerTimer_Start(playerid, 4000, false, using inline StartPuking);
 }

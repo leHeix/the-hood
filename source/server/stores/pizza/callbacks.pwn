@@ -8,13 +8,29 @@
 static Pizza_OnBuy(shop_id, playerid, item_id)
 {
     #pragma unused shop_id
+
+    if(g_rgePlayerData[playerid][e_iPlayerPukeTick] < GetTickCount())
+    {
+        g_rgePlayerData[playerid][e_iPlayerPukeTick] = 0;
+    }
     
+    if(g_rgePlayerData[playerid][e_iPlayerPukeTick] != 0)
+        return 0;
+
     switch(item_id)
     {
         case 0: // Pizza grande con pepperoni 
         {
             SendClientMessage(playerid, -1, "grasias por comprar pizza grande con peperoni mmg");
         }
+    }
+
+    ++g_rgePlayerData[playerid][e_iPlayerEatCount];
+
+    if(g_rgePlayerData[playerid][e_iPlayerEatCount] >= 5)
+    {
+        Food_Puke(playerid);
+        return 0;
     }
 
     return 1;

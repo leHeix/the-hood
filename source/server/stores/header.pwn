@@ -57,9 +57,11 @@ new g_rgeShopItems[HOOD_MAX_SHOPS][HOOD_MAX_SHOP_ITEMS][eShopItem];
 new 
     g_rgiPlayerShopArea[MAX_PLAYERS] = { -1, ... },
     g_rgiPlayerCurrentItem[MAX_PLAYERS],
-    g_rgiPlayerShopObject[MAX_PLAYERS] = { -1, ... };
+    g_rgiPlayerShopObject[MAX_PLAYERS] = { INVALID_OBJECT_ID, ... };
 
 forward Shop_Create(const name[], Float:x, Float:y, Float:z, world, int, Float:cam_x, Float:cam_y, Float:cam_z, Float:cam_look_x, Float:cam_look_y, Float:cam_look_z, buy_callback);
 forward Shop_SetObjectPositions(shop_id, Float:start_x, Float:start_y, Float:start_z, Float:idle_x, Float:idle_y, Float:idle_z, Float:end_x, Float:end_y, Float:end_z);
 forward Shop_SetInlineCallback(shop_id, Func:cb<iii>);
 forward Shop_AddItem(shop_id, const name[], model, price, Float:rx, Float:ry, Float:rz);
+forward Player_StopShopping(playerid);
+forward Food_Puke(playerid);

@@ -39,7 +39,11 @@ Shop_Create(const name[], Float:x, Float:y, Float:z, world, int, Float:cam_x, Fl
     strcpy(g_rgeShops[i][e_szShopName], name);
     g_rgeShops[i][e_iShopLabel] = CreateDynamic3DTextLabel(va_return("{ED2B2B}%s\n{DADADA}Presiona {ED2B2B}Y {DADADA}para ver el inventario", name), 0xED2B2BFF, x, y, z, 10.0, .testlos = 1, .worldid = world, .interiorid = int);
     g_rgeShops[i][e_iShopArea] = CreateDynamicCircle(x, y, 0.5, .worldid = world, .interiorid = int);
-    Streamer_SetIntData(STREAMER_TYPE_AREA, g_rgeShops[i][e_iShopArea], E_STREAMER_EXTRA_ID, i);
+
+    new info[2];
+    info[0] = 0x73686F70;
+    info[1] = i;
+    Streamer_SetArrayData(STREAMER_TYPE_AREA, g_rgeShops[i][e_iShopArea], E_STREAMER_EXTRA_ID, info);
 
     g_rgeShops[i][e_fShopX] = x;
     g_rgeShops[i][e_fShopY] = y;
@@ -100,3 +104,35 @@ Shop_SetObjectPositions(shop_id, Float:start_x, Float:start_y, Float:start_z, Fl
 
     return 1;
 }
+
+Player_StopShopping(playerid)
+{
+    Bit_Set(Player_Flags(playerid), PFLAG_USING_SHOP, false);
+    Bit_Set(Player_Flags(playerid), PFLAG_CAN_USE_SHOP_BUTTONS, false);
+
+    SetCameraBehindPlayer(playerid);
+    TogglePlayerControllable(playerid, true);
+
+    for(new i = (sizeof(g_tdShops) - 1); i != -1; --i)
+    {
+        TextDrawHideForPlayer(playerid, g_tdShops[i]);
+    }
+
+    CancelSelectTextDraw(playerid);
+
+    DestroyPlayerObject(playerid, g_rgiPlayerShopObject[playerid]);
+    g_rgiPlayerShopObject[playerid] = INVALID_OBJECT_ID;
+    g_rgiPlayerCurrentItem[playerid] = 0;
+
+    return 1;
+}
+
+Food_Puke(playerid)
+{
+    Player_StopShopping(playerid);
+
+    Player_Vomit(playerid);
+    g_rgePlayerData[playerid][e_iPlayerEatCount] = 0;
+    g_rgePlayerData[playerid][e_iPlayerPukeTick] = GetTickCount() + 300000;
+    return 1;
+} 

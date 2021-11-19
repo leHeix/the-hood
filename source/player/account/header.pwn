@@ -49,6 +49,9 @@ enum ePlayerData {
 	e_iCurrentConnectionTime, 
 	e_iPlayerPausedBegin,
 	e_iPlayerPausedTime,
+
+    e_iPlayerEatCount,
+    e_iPlayerPukeTick
 };
 
 enum {
@@ -58,6 +61,7 @@ enum {
 	PFLAG_INTRODUCTION_RUNNING,
     PFLAG_USING_SHOP,
     PFLAG_CAN_USE_SHOP_BUTTONS,
+    PFLAG_IS_PUKING,
 
 	MAX_PLAYER_FLAGS
 };

@@ -7,5 +7,6 @@ server_log.txt
 *.amx
 *.asm
 *.lst
+crashinfo.txt
 /scriptfiles/*
 !/scriptfiles/schema.sql

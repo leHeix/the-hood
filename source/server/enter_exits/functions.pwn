@@ -38,7 +38,7 @@ EnterExit_Create(pickup_model, const enter_text[], const exit_text[], Float:ente
     g_rgeEnterExits[i][e_iEnterInterior] = enter_interior;
     g_rgeEnterExits[i][e_iEnterLabel] = CreateDynamic3DTextLabel(enter_text, -1, enter_x, enter_y, enter_z, 10.0, .testlos = 1, .worldid = enter_world, .interiorid = enter_interior);
     g_rgeEnterExits[i][e_iEnterPickup] = CreateDynamicPickup(pickup_model, 1, enter_x, enter_y, enter_z - 0.5, .worldid = enter_world, .interiorid = enter_interior);
-    g_rgeEnterExits[i][e_iEnterArea] = CreateDynamicCircle(enter_x, enter_y, 0.5, .worldid = enter_world, .interiorid = enter_interior);
+    g_rgeEnterExits[i][e_iEnterArea] = CreateDynamicCircle(enter_x, enter_y, 1.0, .worldid = enter_world, .interiorid = enter_interior);
     Streamer_SetArrayData(STREAMER_TYPE_AREA, g_rgeEnterExits[i][e_iEnterArea], E_STREAMER_EXTRA_ID, info);
 
     // Exit
@@ -51,7 +51,7 @@ EnterExit_Create(pickup_model, const enter_text[], const exit_text[], Float:ente
     g_rgeEnterExits[i][e_iExitInterior] = exit_interior;
     g_rgeEnterExits[i][e_iExitLabel] = CreateDynamic3DTextLabel(exit_text, -1, exit_x, exit_y, exit_z, 10.0, .testlos = 1, .worldid = exit_world, .interiorid = exit_interior);
     g_rgeEnterExits[i][e_iExitPickup] = CreateDynamicPickup(pickup_model, 1, exit_x, exit_y, exit_z - 0.5, .worldid = exit_world, .interiorid = exit_interior);
-    g_rgeEnterExits[i][e_iExitArea] = CreateDynamicCircle(exit_x, exit_y, 0.5, .worldid = exit_world, .interiorid = exit_interior);
+    g_rgeEnterExits[i][e_iExitArea] = CreateDynamicCircle(exit_x, exit_y, 1.0, .worldid = exit_world, .interiorid = exit_interior);
     Streamer_SetArrayData(STREAMER_TYPE_AREA, g_rgeEnterExits[i][e_iExitArea], E_STREAMER_EXTRA_ID, info);
 
     g_rgeEnterExits[i][e_iEnterExitData] = extra_data;
