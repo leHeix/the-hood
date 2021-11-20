@@ -32,7 +32,7 @@ hook OnPlayerLeaveDynArea(playerid, areaid)
     return 1;
 }
 
-public OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
+hook OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 {
     if((newkeys & KEY_YES) != 0)
     {
