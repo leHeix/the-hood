@@ -13,7 +13,21 @@ Commands_GetFreeIndex()
         }
     }
     
-    printf("[Commands] Store out of space");
+    // Assume no free index found
+
+    new hdr[AMX_HDR], name[32], est_new;
+    GetAmxHeader(hdr);
+
+    for(new i = GetNumPublics(hdr); i != -1; --i)
+    {
+        if(!GetPublicNameFromIndex(i, name))
+            continue;
+
+        if(!strcmp("mz@cmd_", name, true, 7))
+            est_new++;
+    }
+
+    printf("[Commands] Store out of space. Increase HOOD_MAX_COMMANDS to %d.", est_new);
 
     // Crash the server deliberately.
     // The "exit" RCON command can still continue executing code until the current callback execution stops.

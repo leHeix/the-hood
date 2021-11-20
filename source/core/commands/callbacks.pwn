@@ -15,8 +15,8 @@ hook OnScriptInit()
     {
         if(!GetPublicNameFromIndex(i, pubname))
             continue;
-
-        if(strfind("mz@cmd_", pubname) == 0)
+        
+        if(!strcmp("mz@cmd_", pubname, true, 7))
         {
             new addr = GetPublicAddressFromIndex(i);
             __emit {
