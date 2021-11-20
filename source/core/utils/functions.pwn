@@ -217,3 +217,52 @@ levenshtein(const a[], const b[]) {
 
     return result;
 }
+
+SplitTextInLines(const string[], results[][], split_max = sizeof(results), split_at = sizeof(results[]))
+{
+    ++split_max;
+
+    new string_len = strlen(string) - 1;
+
+    if(string_len < split_at)
+    {
+        return strcpy(results[0], string, split_at);
+    }
+
+    new j, lastwrap;
+
+    for(new i, wraploc; i < string_len && j < split_max; ++i, ++wraploc)
+    {
+        if(wraploc >= split_at)
+        {
+            for(new k = i; k > 0; --k)
+            {
+                if(k - lastwrap <= split_at && string[k] == ' ')
+                {
+                    strmid(results[j++], string, lastwrap, k + 1, (j ? split_at - 2 : split_at));
+                    if(j)
+                        strins(results[j], "— ", 0, split_at);
+
+                    lastwrap = k + 1;
+                    break;
+                }
+            }
+            wraploc = i - lastwrap;
+        }
+    }
+
+    if(!(lastwrap >= string_len) && j < split_max)
+        format(results[j++], split_at, "— %s", string[lastwrap]);
+
+    return j;
+}
+
+DelayedKick(playerid, time = 250)
+{
+    inline const Due()
+    {
+        Kick(playerid);
+    }
+    PlayerTimer_Start(playerid, time, false, using inline Due);
+    return 1;
+}

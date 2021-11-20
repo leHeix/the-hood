@@ -58,6 +58,8 @@ Account_Save(playerid)
 	{
 		GetPlayerPos(playerid, g_rgePlayerData[playerid][e_fSpawnPosX], g_rgePlayerData[playerid][e_fSpawnPosY], g_rgePlayerData[playerid][e_fSpawnPosZ]);
 		GetPlayerFacingAngle(playerid, g_rgePlayerData[playerid][e_fSpawnPosAngle]);
+        g_rgePlayerData[playerid][e_iPlayerVirtualWorld] = GetPlayerVirtualWorld(playerid);
+        g_rgePlayerData[playerid][e_iPlayerInterior] = GetPlayerInterior(playerid);
 	}
 
 	mysql_format(g_hDatabase, YSI_UNSAFE_HUGE_STRING, YSI_UNSAFE_HUGE_LENGTH, "\

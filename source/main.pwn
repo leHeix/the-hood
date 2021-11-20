@@ -86,6 +86,7 @@ DEFINE_HOOK_REPLACEMENT__(OnPlayer, OP);
 #include "core/fixes/textdraws.pwn"
 #include "core/utils/bcrypt_inline.pwn"
 #include "core/utils/objects_inline.pwn"
+#include "core/utils/colour.pwn"
 
 // Headers
 /////////////
@@ -99,6 +100,7 @@ DEFINE_HOOK_REPLACEMENT__(OnPlayer, OP);
 #include "server/notifications/header.pwn"
 #include "server/enter_exits/header.pwn"
 #include "server/stores/header.pwn"
+#include "server/chat/header.pwn"
 #include "player/account/header.pwn"
 #include "player/needs/header.pwn"
 #include "player/auth/header.pwn"
@@ -113,6 +115,7 @@ DEFINE_HOOK_REPLACEMENT__(OnPlayer, OP);
 #include "server/notifications/functions.pwn"
 #include "server/enter_exits/functions.pwn"
 #include "server/stores/functions.pwn"
+#include "server/chat/functions.pwn"
 #include "player/account/functions.pwn"
 #include "player/needs/functions.pwn"
 #include "player/auth/functions.pwn"
@@ -129,12 +132,14 @@ DEFINE_HOOK_REPLACEMENT__(OnPlayer, OP);
 #include "server/enter_exits/callbacks.pwn"
 #include "server/stores/callbacks.pwn"
 #include "server/stores/pizza/callbacks.pwn"
+#include "server/chat/callbacks.pwn"
 #include "player/account/callbacks.pwn"
 #include "player/needs/callbacks.pwn"
 #include "player/auth/callbacks.pwn"
 
 // Commands
 //////////////
+#include "server/chat/commands.pwn"
 #include "player/needs/commands.pwn"
 
 public OnGameModeInit()

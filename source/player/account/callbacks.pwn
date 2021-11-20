@@ -30,7 +30,34 @@ hook OnPlayerConnect(playerid)
 {
 	EnablePlayerCameraTarget(playerid, true);
 
-	GetPlayerName(playerid, Player_GetName(playerid), MAX_PLAYER_NAME);
+	new len = GetPlayerName(playerid, Player_GetName(playerid), MAX_PLAYER_NAME);
+    {
+        new String:tmp = str_new_arr(Player_GetName(playerid), len + 1);
+        if(!str_match(tmp, "^[A-Z][a-zA-Z]+_{1}[A-Z][a-zA-Z]+$"))
+        {
+            Dialog_Show(
+                playerid, DIALOG_STYLE_MSGBOX, 
+                "{DADADA}Nombre {ED2B2B}inválido", 
+                "{DADADA}Tu cuenta no puede ser registrada con un nombre inválido. Para entrar al servidor, tu nombre debe seguir el siguiente patrón:\n\t\t\t{ED2B2B}^[A-Z][a-zA-Z]+_{1}[A-Z][a-zA-Z]+$\"",
+                "Entendido", ""
+            );
+            DelayedKick(playerid);
+            return ~1;
+        }
+    }
+
+    for(new i = strlen(Player_GetName(playerid)) - 1; i != -1; --i)
+    {
+        if(g_rgePlayerData[playerid][e_szPlayerName][i] == '_')
+        {
+            g_rgePlayerData[playerid][e_szPlayerFixedName][i] = ' ';
+        }
+        else
+        {
+            g_rgePlayerData[playerid][e_szPlayerFixedName][i] = g_rgePlayerData[playerid][e_szPlayerName][i];
+        }
+    }
+
 	Player_GetIp(playerid) = GetPlayerRawIp(playerid);
 
 	Bit_Set(Player_Flags(playerid), PFLAG_AUTHENTICATING, true);

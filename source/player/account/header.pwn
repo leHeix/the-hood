@@ -24,6 +24,7 @@ enum ePlayerData {
     Cache:e_pDataCache,
 	e_iAccountId,
 	e_szPlayerName[MAX_PLAYER_NAME],
+	e_szPlayerFixedName[MAX_PLAYER_NAME],
 	e_iPlayerIp,
 	e_szPlayerLastConnection[20],
 	Float:e_fPlayerHealth,
@@ -56,6 +57,7 @@ enum ePlayerData {
 
 enum {
 	PFLAG_AUTHENTICATING = 0,
+    PFLAG_IN_GAME,
 	PFLAG_REGISTERED,
 	PFLAG_CUSTOMIZING_PLAYER,
 	PFLAG_INTRODUCTION_RUNNING,
@@ -78,6 +80,7 @@ new
 #define Player_Flags(%0) Bit:(g_rgiPlayerFlags[(%0)])
 #define Player_AccountID(%0) (g_rgePlayerData[(%0)][e_iAccountId])
 #define Player_GetName(%0) (g_rgePlayerData[(%0)][e_szPlayerName])
+#define Player_RPName(%0) (g_rgePlayerData[(%0)][e_szPlayerFixedName])
 #define Player_GetIp(%0) (g_rgePlayerData[(%0)][e_iPlayerIp])
 #define Player_GetIpString(%0) (RawIpToString(g_rgePlayerData[(%0)][e_iPlayerIp]))
 #define Player_GetLastConnection(%0) (g_rgePlayerData[(%0)][e_szPlayerLastConnection])

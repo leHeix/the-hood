@@ -51,9 +51,9 @@ hook OnPlayerCommandReceived(playerid, cmd[], params[], flags)
 	if(cmd_level != Player_Rank(playerid))
 		return 0;
 
-	if(!(flags & CMD_NO_COOLDOWN) && g_rgiPlayerCommandCooldown[playerid] + 1000 > GetTickCount())
+	if(!(flags & CMD_NO_COOLDOWN) && g_rgiPlayerCommandCooldown[playerid] + 500 > GetTickCount())
 	{
-		SendClientMessage(playerid, 0xFFA02BFF, "Solo puedes enviar un comando por segundo. Algunos comandos no disponen de tiempo de espera.");
+		SendClientMessage(playerid, 0xDADADAFF, "Solo puedes enviar {ED2B2B}dos comando por segundo{DADADA}. Algunos comandos no disponen de tiempo de espera.");
 		return 0;
 	}
 
