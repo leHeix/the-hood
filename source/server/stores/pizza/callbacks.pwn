@@ -19,9 +19,11 @@ static Pizza_OnBuy(shop_id, playerid, item_id)
 
     switch(item_id)
     {
-        case 0: // Pizza grande con pepperoni 
+        case 0: // Porción de pizza pepperoni
         {
-            SendClientMessage(playerid, -1, "grasias por comprar pizza grande con peperoni mmg");
+            SendClientMessagef(playerid, 0xDADADAFF, "Compraste una {ED2B2B}%s{DADADA}.", g_rgeShopItems[shop_id][item_id][e_szItemName]);
+            Player_SetHunger(playerid, Player_Hunger(playerid) - 10.0);
+            Player_SetThirst(playerid, Player_Thirst(playerid) - 1.0);
         }
     }
 

@@ -191,3 +191,17 @@ Player_Vomit(playerid)
     }
     PlayerTimer_Start(playerid, 4000, false, using inline StartPuking);
 }
+
+Player_SetHunger(playerid, Float:hunger)
+{
+    // clamp floating-point values
+    Player_Hunger(playerid) = (hunger < 0.0 ? 0.0 : (hunger > 100.0 ? 100.0 : hunger));
+    return 1;
+}
+
+Player_SetThirst(playerid, Float:thirst)
+{
+    // clamp floating-point-values
+    Player_Thirst(playerid) = (thirst < 0.0 ? 0.0 : (thirst > 100.0 ? 100.0 : thirst));
+    return 1;
+}
