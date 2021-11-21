@@ -266,3 +266,22 @@ DelayedKick(playerid, time = 250)
     PlayerTimer_Start(playerid, time, false, using inline Due);
     return 1;
 }
+
+binary_search(const arr[], value, low = 0, high = sizeof(arr))
+{
+    --high;
+    
+    while(low <= high)
+    {
+        new middle = low + (high - low) / 2;
+        if(arr[middle] == value)
+            return middle;
+
+        if(arr[middle] < value)
+            low = middle + 1;
+        else
+            high = middle - 1;
+    }
+
+    return -1;
+}

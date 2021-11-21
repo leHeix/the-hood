@@ -34,8 +34,12 @@ hook OnScriptInit()
     return 1;
 }
 
-hook OnPlayerCommandReceived(playerid, cmd[], params[], flags)
+public OnPlayerCommandReceived(playerid, cmd[], params[], flags)
 {
+#if defined DEBUG_MODE
+    printf("OnPlayerCommandReceived(%d, \"%s\", \"%s\", %b)", playerid, cmd, params, flags);
+#endif
+
 	/*
 		quick explanation:
 		our flag thing uses 3 bytes for the flags and 1 byte for the level (4 bytes, a cell)
@@ -49,12 +53,12 @@ hook OnPlayerCommandReceived(playerid, cmd[], params[], flags)
 	new cmd_level = (flags >>> 24);
 
 	if(cmd_level != Player_Rank(playerid))
-		return 0;
+		return -1;
 
 	if(!(flags & CMD_NO_COOLDOWN) && g_rgiPlayerCommandCooldown[playerid] + 500 > GetTickCount())
 	{
 		SendClientMessage(playerid, 0xDADADAFF, "Solo puedes enviar {ED2B2B}dos comando por segundo{DADADA}. Algunos comandos no disponen de tiempo de espera.");
-		return 0;
+		return -1;
 	}
 
 	g_rgiPlayerCommandCooldown[playerid] = GetTickCount();
@@ -62,7 +66,7 @@ hook OnPlayerCommandReceived(playerid, cmd[], params[], flags)
 	return 1;
 }
 
-hook OnPlayerCmdPerformed(playerid, cmd[], params[], result, flags)
+public OnPlayerCommandPerformed(playerid, cmd[], params[], result, flags)
 {
 #if defined DEBUG_MODE
     printf("OnPlayerCommandPerformed(%d, \"%s\", \"%s\", %d, %b)", playerid, cmd, params, result, flags);

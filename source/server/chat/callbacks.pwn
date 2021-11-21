@@ -24,9 +24,9 @@ hook OnPlayerText(playerid, text[])
 
     new message[192];
     if(GetPlayerDrunkLevel(playerid) > 2000)
-        format(message, sizeof(message), "%s alcoholizad%c dice: %s", Player_GetName(playerid), (Player_Sex(playerid) ? 'a' : 'o'), text);
+        format(message, sizeof(message), "%s alcoholizad%c dice: %s", Player_RPName(playerid), (Player_Sex(playerid) ? 'a' : 'o'), text);
     else
-        format(message, sizeof(message), "%s dice: %s", Player_GetName(playerid), text);
+        format(message, sizeof(message), "%s dice: %s", Player_RPName(playerid), text);
     
     Player_SendLocalMessage(playerid, -1, 15.0, message);
 

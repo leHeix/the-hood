@@ -63,7 +63,9 @@ bool:Commands_GetDescription(const command[], destination[], length = sizeof(des
 }
 
 Commands_ShowSuggestions(playerid, const command[])
-{    
+{
+    print("Commands_ShowSuggestions");
+
     new CmdArray:arr = PC_GetCommandArray();
     new cmd_size = PC_GetArraySize(arr);
     new distances[HOOD_MAX_COMMANDS][2];
@@ -72,6 +74,10 @@ Commands_ShowSuggestions(playerid, const command[])
     for(new i; i < cmd_size && distances_length < 20; ++i)
     {
         PC_GetCommandName(arr, i, cmd_name);
+        
+        if(Commands_GetByName(cmd_name) == -1)
+            continue;
+
         new cmd_flags = PC_GetFlags(cmd_name);
         if(cmd_flags & CMD_HIDDEN)
             continue;
@@ -91,13 +97,13 @@ Commands_ShowSuggestions(playerid, const command[])
 
     if(!distances_length)
     {
-        SendClientMessagef(playerid, -1, "({FF3300}/%s{FFFFFF}) Comando desconocido, usa {DBED15}/ayuda{FFFFFF} para recibir ayuda.", command);
+        SendClientMessagef(playerid, 0xDADADAFF, "({ED2B2B}/%s{DADADA}) Comando desconocido, usa {ED2B2B}/ayuda{DADADA} para recibir ayuda.", command);
         return 1;
     }
 
     SortDeepArray(distances, 1, .order = SORT_DESC);
 
-    static dialog_str[128 * 20] = "{DADADA}Sugerencias:\t \n";
+    new dialog_str[128 * 20] = "{DADADA}Sugerencias:\t \n";
     new line[128], cmd_description[50] = !"Sin descripción";
     for(new i; i < distances_length; ++i)
     {

@@ -69,6 +69,7 @@ hook OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
             
                 SelectTextDraw(playerid, 0xD2B567FF);
 
+                PlayerPlaySound(playerid, 1145, 0.0, 0.0, 0.0);
                 g_rgiPlayerCurrentItem[playerid] = 0;
                 g_rgiPlayerShopObject[playerid] = CreatePlayerObject(playerid, g_rgeShopItems[shop_id][0][e_iItemModel], g_rgeShops[shop_id][e_fShopObjectStartX], g_rgeShops[shop_id][e_fShopObjectStartY], g_rgeShops[shop_id][e_fShopObjectStartZ], g_rgeShopItems[shop_id][0][e_fRotationX], g_rgeShopItems[shop_id][0][e_fRotationY], g_rgeShopItems[shop_id][0][e_fRotationZ]);
                 MovePlayerObject(playerid, g_rgiPlayerShopObject[playerid], g_rgeShops[shop_id][e_fShopObjectIdleX], g_rgeShops[shop_id][e_fShopObjectIdleY], g_rgeShops[shop_id][e_fShopObjectIdleZ], 1.2);
@@ -114,6 +115,7 @@ hook OnPlayerClickTextDraw(playerid, Text:clickedid)
             {
                 Bit_Set(Player_Flags(playerid), PFLAG_CAN_USE_SHOP_BUTTONS, true);
                 
+                PlayerPlaySound(playerid, 1145, 0.0, 0.0, 0.0);
                 DestroyPlayerObject(playerid, g_rgiPlayerShopObject[playerid]);
                 g_rgiPlayerShopObject[playerid] = CreatePlayerObject(playerid, g_rgeShopItems[shop_id][g_rgiPlayerCurrentItem[playerid]][e_iItemModel], g_rgeShops[shop_id][e_fShopObjectStartX], g_rgeShops[shop_id][e_fShopObjectStartY], g_rgeShops[shop_id][e_fShopObjectStartZ], g_rgeShopItems[shop_id][g_rgiPlayerCurrentItem[playerid]][e_fRotationX], g_rgeShopItems[shop_id][g_rgiPlayerCurrentItem[playerid]][e_fRotationY], g_rgeShopItems[shop_id][g_rgiPlayerCurrentItem[playerid]][e_fRotationZ]);
                 MovePlayerObject(playerid, g_rgiPlayerShopObject[playerid], g_rgeShops[shop_id][e_fShopObjectIdleX], g_rgeShops[shop_id][e_fShopObjectIdleY], g_rgeShops[shop_id][e_fShopObjectIdleZ], 1.2);
@@ -138,7 +140,8 @@ hook OnPlayerClickTextDraw(playerid, Text:clickedid)
             inline const MovingDone()
             {
                 Bit_Set(Player_Flags(playerid), PFLAG_CAN_USE_SHOP_BUTTONS, true);
-                
+
+                PlayerPlaySound(playerid, 1145, 0.0, 0.0, 0.0);                
                 DestroyPlayerObject(playerid, g_rgiPlayerShopObject[playerid]);
                 g_rgiPlayerShopObject[playerid] = CreatePlayerObject(playerid, g_rgeShopItems[shop_id][g_rgiPlayerCurrentItem[playerid]][e_iItemModel], g_rgeShops[shop_id][e_fShopObjectStartX], g_rgeShops[shop_id][e_fShopObjectStartY], g_rgeShops[shop_id][e_fShopObjectStartZ], g_rgeShopItems[shop_id][g_rgiPlayerCurrentItem[playerid]][e_fRotationX], g_rgeShopItems[shop_id][g_rgiPlayerCurrentItem[playerid]][e_fRotationY], g_rgeShopItems[shop_id][g_rgiPlayerCurrentItem[playerid]][e_fRotationZ]);
                 MovePlayerObject(playerid, g_rgiPlayerShopObject[playerid], g_rgeShops[shop_id][e_fShopObjectIdleX], g_rgeShops[shop_id][e_fShopObjectIdleY], g_rgeShops[shop_id][e_fShopObjectIdleZ], 1.2);

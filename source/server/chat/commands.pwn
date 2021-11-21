@@ -5,7 +5,15 @@
 
 command decir(playerid, const params[], "Envia un mensaje como tu personaje")
 {
-    extract params -> new text[192]; else return SendClientMessage(playerid, 0xDADADAFF, "USO: {ED2B2B}/decir{DADADA} <mensaje>");
+    if(g_rgiPlayerLastMessageTick[playerid] > GetTickCount())
+    {
+        SendClientMessagef(playerid, 0xDADADAFF, "Solo puedes enviar {ED2B2B}un mensaje {DADADA}cada {ED2B2B}%.2f segundos{DADADA}.", floatdiv(CHAT_MESSAGE_DELAY, 1000));
+        return 0;
+    }
+
+    new text[192];
+    if(sscanf(params, "s[144]", text))
+        return SendClientMessage(playerid, 0xDADADAFF, "USO: {ED2B2B}/decir{DADADA} <mensaje>");
 
     for(new i = strlen(text) - 1; i != -1; --i)
     {
@@ -33,7 +41,15 @@ alias:decir("d")
 
 command ooc(playerid, const params[], "Envia un mensaje al canal fuera de rol")
 {
-    extract params -> new text[192]; else return SendClientMessage(playerid, 0xDADADAFF, "USO: {ED2B2B}/ooc{DADADA} <mensaje>");
+    if(g_rgiPlayerLastMessageTick[playerid] > GetTickCount())
+    {
+        SendClientMessagef(playerid, 0xDADADAFF, "Solo puedes enviar {ED2B2B}un mensaje {DADADA}cada {ED2B2B}%.2f segundos{DADADA}.", floatdiv(CHAT_MESSAGE_DELAY, 1000));
+        return 0;
+    }
+
+    new text[192];
+    if(sscanf(params, "s[144]", text))
+        return SendClientMessage(playerid, 0xDADADAFF, "USO: {ED2B2B}/ooc{DADADA} <mensaje>");
 
     for(new i = strlen(text) - 1; i != -1; --i)
     {
@@ -42,12 +58,12 @@ command ooc(playerid, const params[], "Envia un mensaje al canal fuera de rol")
     }
 
     format(text, sizeof(text), "%s: (( %s ))", Player_RPName(playerid), text);
-    Player_SendLocalMessage(playerid, 0x595959FF, 15.0, text);
+    Player_SendLocalMessage(playerid, 0xABABABFF, 15.0, text);
 
     new short[25];
     format(short, sizeof(short), "(( %.15s%s ))", text, (strlen(text) > 15 ? "..." : ""));
 
-    SetPlayerChatBubble(playerid, short, 0x595959FF, 5.0, 5000);
+    SetPlayerChatBubble(playerid, short, 0xABABABFF, 5.0, 5000);
 
     g_rgiPlayerLastMessageTick[playerid] = GetTickCount() + CHAT_MESSAGE_DELAY;
 
@@ -57,7 +73,15 @@ alias:ooc("b")
 
 command gritar(playerid, const params[], "Envia un grito como tu personaje")
 {
-    extract params -> new text[192]; else return SendClientMessage(playerid, 0xDADADAFF, "USO: {ED2B2B}/gritar{DADADA} <mensaje>");
+    if(g_rgiPlayerLastMessageTick[playerid] > GetTickCount())
+    {
+        SendClientMessagef(playerid, 0xDADADAFF, "Solo puedes enviar {ED2B2B}un mensaje {DADADA}cada {ED2B2B}%.2f segundos{DADADA}.", floatdiv(CHAT_MESSAGE_DELAY, 1000));
+        return 0;
+    }
+
+    new text[192];
+    if(sscanf(params, "s[144]", text))
+        return SendClientMessage(playerid, 0xDADADAFF, "USO: {ED2B2B}/gritar{DADADA} <mensaje>");
 
     for(new i = strlen(text) - 1; i != -1; --i)
     {
@@ -85,10 +109,20 @@ alias:gritar("g")
 
 command me(playerid, const params[], "Ejecuta una acción dentro de rol")
 {
-    extract params -> new action[128]; else return SendClientMessage(playerid, 0xDADADAFF, "USO: {ED2B2B}/me{DADADA} <acción>");
+    if(g_rgiPlayerLastMessageTick[playerid] > GetTickCount())
+    {
+        SendClientMessagef(playerid, 0xDADADAFF, "Solo puedes enviar {ED2B2B}un mensaje {DADADA}cada {ED2B2B}%.2f segundos{DADADA}.", floatdiv(CHAT_MESSAGE_DELAY, 1000));
+        return 0;
+    }
+    
+    new action[128];
+    if(sscanf(params, "s[128]", action)) 
+        return SendClientMessage(playerid, 0xDADADAFF, "USO: {ED2B2B}/me{DADADA} <acción>");
 
     format(action, sizeof(action), "%s %s", Player_RPName(playerid), action);
-    Player_SendLocalMessage(playerid, 0xA443C4FF, 15.0, action);
+    Player_SendLocalMessage(playerid, 0xC157EBFF, 15.0, action);
+
+    g_rgiPlayerLastMessageTick[playerid] = GetTickCount() + CHAT_MESSAGE_DELAY;
 
     return 1;
 }
@@ -96,10 +130,20 @@ alias:me("y")
 
 command do(playerid, const params[], "Indica el entorno actual")
 {
-    extract params -> new env[128]; else return SendClientMessage(playerid, 0xDADADAFF, "USO: {ED2B2B}/do{DADADA} <entorno>");
+    if(g_rgiPlayerLastMessageTick[playerid] > GetTickCount())
+    {
+        SendClientMessagef(playerid, 0xDADADAFF, "Solo puedes enviar {ED2B2B}un mensaje {DADADA}cada {ED2B2B}%.2f segundos{DADADA}.", floatdiv(CHAT_MESSAGE_DELAY, 1000));
+        return 0;
+    }
+
+    new env[128];
+    if(sscanf(params, "s[128]", env))
+        return SendClientMessage(playerid, 0xDADADAFF, "USO: {ED2B2B}/do{DADADA} <entorno>");
 
     format(env, sizeof(env), "%s (( %s ))", env, Player_RPName(playerid));
     Player_SendLocalMessage(playerid, 0x46C759FF, 15.0, env);
+
+    g_rgiPlayerLastMessageTick[playerid] = GetTickCount() + CHAT_MESSAGE_DELAY;
 
     return 1;
 }

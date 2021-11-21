@@ -44,7 +44,7 @@ enum eShop {
 new g_rgeShops[HOOD_MAX_SHOPS][eShop];
 
 enum eShopItem {
-    e_szItemName[24],
+    e_szItemName[48],
     e_iItemModel,
     e_iItemPrice,
     Float:e_fRotationX,

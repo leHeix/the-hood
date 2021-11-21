@@ -54,6 +54,9 @@ Account_Save(playerid)
 	if(!Player_AccountID(playerid))
 		return 0;
 
+    if(!Bit_Get(Player_Flags(playerid), PFLAG_IN_GAME))
+        return 0;
+
 	if(IsPlayerSpawned(playerid))
 	{
 		GetPlayerPos(playerid, g_rgePlayerData[playerid][e_fSpawnPosX], g_rgePlayerData[playerid][e_fSpawnPosY], g_rgePlayerData[playerid][e_fSpawnPosZ]);

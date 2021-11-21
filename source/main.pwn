@@ -66,6 +66,7 @@ L1:
 #include <bcrypt>
 #include <md-sort/md-sort>
 #include <td-string-width>
+#include <colandreas>
 
 #include <YSI_Coding\y_hooks>
 #include <YSI_Coding\y_inline>
@@ -144,6 +145,8 @@ DEFINE_HOOK_REPLACEMENT__(OnPlayer, OP);
 
 public OnGameModeInit()
 {
+    CA_Init();
+
     return 1;
 }
 
@@ -244,7 +247,6 @@ CMD:goto(playerid, const params[])
 
     return 1;
 }
-#endif
 
 CMD:desbug(playerid, const params[])
 {
@@ -278,3 +280,4 @@ public OnPlayerEditObject(playerid, playerobject, objectid, response, Float:fX, 
     SendClientMessagef(playerid, -1, "rZ: %.2f", fRotZ);
     return 1;
 }
+#endif

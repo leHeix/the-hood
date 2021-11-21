@@ -49,7 +49,7 @@ public OnQueryError(errorid, const error[], const callback[], const query[], MyS
     printf("[MySQL] Caught error while exeuting query on handle %d.", _:handle);
     printf("[!] Error", error);
     printf("[!] Callback: \"%s\"", callback);
-    print("[!] Query:");
+    print ("[!] Query:");
     printf("[!]    %s", query);
 
     return 1;
