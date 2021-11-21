@@ -14,6 +14,7 @@ const Float:NOT_INITIAL_POS_X = -100.0;
 const Float:NOT_SUB_VAL = 208.0;
 const Float:NOT_DISTANCE = 46.0;
 const MAX_NOTIFICATIONS = 3;
+const NOTIFICATION_TEXT_BEAT_DIFF = 4;
 
 enum _:eNotificationData {
 	String:e_sNotificationText,
@@ -21,6 +22,8 @@ enum _:eNotificationData {
 };
 
 new
+    g_rgiTextProcessTimer[MAX_PLAYERS],
+    g_rgiTextProcessTick[MAX_PLAYERS],
 	g_rgiNotifUpdateTimer[MAX_PLAYERS][MAX_NOTIFICATIONS],
 	g_rgiNotifDeltaCount[MAX_PLAYERS][MAX_NOTIFICATIONS char],
 	Pool:g_rgpNotificationQueue[MAX_PLAYERS],
@@ -28,3 +31,4 @@ new
 
 forward NOTIFICATION_MoveRight(playerid, index, Float:max, delta, wait_after);
 forward NOTIFICATION_MoveLeft(playerid, index, Float:max, delta);
+forward NOTIFICATION_ProcessText(playerid, time, alpha_min, alpha_max, bool:should_hide);

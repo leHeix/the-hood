@@ -1,8 +1,7 @@
 {
     "[pawn]": {
         "files.encoding": "windows1252",
-        "editor.formatOnType": true,
-        "editor.formatOnSave": true
+        "editor.formatOnPaste": false
     },
     "cmake.configureOnOpen": false
 }

@@ -14,4 +14,5 @@ new
 	PlayerText:p_tdTransition[MAX_PLAYERS char],
 	PlayerText:p_tdRegisterAcc[MAX_PLAYERS][5 char],
 	PlayerText:p_tdPlayerCustomization[MAX_PLAYERS char],
-    PlayerText:p_tdNotifications[MAX_PLAYERS][3][5 char];
+    PlayerText:p_tdNotifications[MAX_PLAYERS][3][5 char],
+    PlayerText:p_tdBeatingText[MAX_PLAYERS char];

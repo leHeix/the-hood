@@ -282,3 +282,9 @@ public OnPlayerEditObject(playerid, playerobject, objectid, response, Float:fX, 
     return 1;
 }
 #endif
+
+CMD:text(playerid, const params[])
+{
+    Notification_ShowBeatingText(playerid, 20000, 0xED2B2B, 255, 100, "mamaguebo");
+    return 1;
+}

@@ -1,19 +1,8 @@
-/*
-	https://gist.github.com/deru-dietrich/efd2e1baefc61fe40f58f5bacf27f0fa
-*/
-
-#if defined _color_manipulation_included
-    #endinput
-#endif
-
-#define _color_manipulation_included
-
 #define Color_RGBToHex(%0,%1,%2) (0xFF | ((%2) << 8) | ((%1) << 16) | ((%0) << 24))
 #define Color_RGBAToHex(%0,%1,%2,%3) ((%3) | ((%2) << 8) | ((%1) << 16) | ((%0) << 24))
 #define Color_RGBAToARGB(%0,%1,%2,%3) ((%2) | ((%1) << 8) | ((%0) << 16) | ((%3) << 24))
 #define Color_Darken(%0,%1) ((%0) & Color_RGBToHex((%1), (%1), (%1)))
 #define Color_Brighten(%0,%1) (~(~(%0) & Color_RGBToHex((%1), (%1), (%1))))
-#define Color_RGBAToABGR(%0) ((RGBA_GetRed(%0)) | ((RGBA_GetGreen(%0)) << 8) | ((RGBA_GetBlue(%0)) << 16) | ((RGBA_GetAlpha(%0)) << 24))
 
 // -------
 // RGBA

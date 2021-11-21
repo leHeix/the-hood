@@ -1258,5 +1258,19 @@ hook OnPlayerConnect(playerid)
 		PlayerTextDrawSetSelectable(playerid, p_tdNotifications[playerid][i]{4}, 0);
 	}
 
+    p_tdBeatingText{playerid} = CreatePlayerTextDraw(playerid, 324.000000, 410.000000, "_");
+    PlayerTextDrawFont(playerid, p_tdBeatingText{playerid}, 2);
+    PlayerTextDrawLetterSize(playerid, p_tdBeatingText{playerid}, 0.158333, 1.350000);
+    PlayerTextDrawTextSize(playerid, p_tdBeatingText{playerid}, 400.000000, 17.000000);
+    PlayerTextDrawSetOutline(playerid, p_tdBeatingText{playerid}, 0);
+    PlayerTextDrawSetShadow(playerid, p_tdBeatingText{playerid}, 1);
+    PlayerTextDrawAlignment(playerid, p_tdBeatingText{playerid}, 2);
+    PlayerTextDrawColor(playerid, p_tdBeatingText{playerid}, -1);
+    PlayerTextDrawBackgroundColor(playerid, p_tdBeatingText{playerid}, 255);
+    PlayerTextDrawBoxColor(playerid, p_tdBeatingText{playerid}, 50);
+    PlayerTextDrawUseBox(playerid, p_tdBeatingText{playerid}, 0);
+    PlayerTextDrawSetProportional(playerid, p_tdBeatingText{playerid}, 1);
+    PlayerTextDrawSetSelectable(playerid, p_tdBeatingText{playerid}, 0);
+
 	return 1;
 }

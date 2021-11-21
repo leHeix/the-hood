@@ -86,3 +86,17 @@ _Notification_HideAll(playerid, index)
 	PlayerTextDrawHide(playerid, p_tdNotifications[playerid][index]{3});
 	PlayerTextDrawHide(playerid, p_tdNotifications[playerid][index]{4});
 }
+
+Notification_ShowBeatingText(playerid, time, colour, alpha_max, alpha_min, const text[])
+{
+    new td_colour = (colour << 8) ^ alpha_max;
+    PlayerTextDrawColor(playerid, p_tdBeatingText{playerid}, td_colour);
+    PlayerTextDrawBackgroundColor(playerid, p_tdBeatingText{playerid}, alpha_max);
+    PlayerTextDrawSetString(playerid, p_tdBeatingText{playerid}, text);
+    PlayerTextDrawShow(playerid, p_tdBeatingText{playerid});
+
+    g_rgiTextProcessTick[playerid] = GetTickCount();
+    g_rgiTextProcessTimer[playerid] = SetTimerEx("NOTIFICATION_ProcessText", 10, true, "iiiii", playerid, time, alpha_min, alpha_max, false);
+
+    return 1;
+}

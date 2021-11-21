@@ -1,3 +1,6 @@
 [submodule "compiler/include/YSI"]
 	path = compiler/include/YSI
 	url = https://github.com/pawn-lang/YSI-Includes
+[submodule "compiler/include/tdw"]
+	path = compiler/include/tdw
+	url = https://github.com/tdworg/samp-include-vehicle
