@@ -8,7 +8,7 @@ Str_FixEncoding(const string[])
     // This goes on data, doesn't matter if it's the whole stack in size
     // Though copy can be quite expensive.
     static result[4096];
-    strcpy(result, string);
+    StrCpy(result, string);
 
     for (new i = (strlen(result) - 1); i != -1; --i)
     {
@@ -226,7 +226,7 @@ SplitTextInLines(const string[], results[][], split_max = sizeof(results), split
 
     if(string_len < split_at)
     {
-        return strcpy(results[0], string, split_at);
+        return StrCpy(results[0], string, split_at);
     }
 
     new j, lastwrap;

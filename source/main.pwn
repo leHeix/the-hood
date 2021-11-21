@@ -77,6 +77,7 @@ L1:
 #include <YSI_Data\y_iterate>
 #include <YSI_Data\y_sparsearray>
 #include <YSI_Extra\y_inline_mysql>
+#include <YSI_Game\y_vehicledata>
 #include <YSI_Server\y_scriptinit>
 #include <YSI_Visual\y_dialog>
 
@@ -197,7 +198,7 @@ SSCANF:specialaction(string[])
 CMD:special_action(playerid, const params[])
 {
     new action;
-    sscanf(params, "K<specialaction>(SPECIAL_ACTION_NONE)", action);   
+    sscanf(params, "K<specialaction>(SPECIAL_ACTION_NONE)", action);
 
     SetPlayerSpecialAction(playerid, action);
     return 1;

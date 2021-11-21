@@ -36,7 +36,7 @@ Shop_Create(const name[], Float:x, Float:y, Float:z, world, int, Float:cam_x, Fl
 
     g_rgeShops[i][e_bShopValid] = true;
 
-    strcpy(g_rgeShops[i][e_szShopName], name);
+    StrCpy(g_rgeShops[i][e_szShopName], name);
     g_rgeShops[i][e_iShopLabel] = CreateDynamic3DTextLabel(va_return("{ED2B2B}%s\n{DADADA}Presiona {ED2B2B}Y {DADADA}para ver el inventario", name), 0xED2B2BFF, x, y, z, 10.0, .testlos = 1, .worldid = world, .interiorid = int);
     g_rgeShops[i][e_iShopArea] = CreateDynamicCircle(x, y, 0.5, .worldid = world, .interiorid = int);
 
@@ -75,13 +75,13 @@ Shop_AddItem(shop_id, const name[], model, price, Float:rx, Float:ry, Float:rz)
         return -1;
     }
 
-    strcpy(g_rgeShopItems[shop_id][item_id][e_szItemName], name);
+    StrCpy(g_rgeShopItems[shop_id][item_id][e_szItemName], name);
     g_rgeShopItems[shop_id][item_id][e_iItemModel] = model;
     g_rgeShopItems[shop_id][item_id][e_iItemPrice] = price;
     g_rgeShopItems[shop_id][item_id][e_fRotationX] = rx;
     g_rgeShopItems[shop_id][item_id][e_fRotationY] = ry;
     g_rgeShopItems[shop_id][item_id][e_fRotationZ] = rz;
-    
+
     ++g_rgeShops[shop_id][e_iShopItemAmount];
 
     return item_id;
@@ -135,4 +135,4 @@ Food_Puke(playerid)
     g_rgePlayerData[playerid][e_iPlayerEatCount] = 0;
     g_rgePlayerData[playerid][e_iPlayerPukeTick] = GetTickCount() + 300000;
     return 1;
-} 
+}

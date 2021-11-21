@@ -154,13 +154,13 @@ hook OnPlayerClickPlayerTD(playerid, PlayerText:playertextid)
 				if(len >= 32)
 					return Dialog_ShowCallback(playerid, using inline Response, DIALOG_STYLE_INPUT, "Introduce tu {D2B567}contraseña", "{FFFFFF}Introduce tu contraseña. Debe medir {D2B567}menos de 32 caracteres{FFFFFF}.", "Listo", "");
 			
-				strcpy(p_szPassword[playerid], inputtext);
+				StrCpy(p_szPassword[playerid], inputtext);
 
 				new tdstring[32];
 				if(!g_rgbPasswordShown{playerid})
-					memset(tdstring, 'X', len);
+					MemSet(tdstring, 'X', len);
 				else
-					strcpy(tdstring, inputtext);
+					StrCpy(tdstring, inputtext);
 
 				PlayerTextDrawSetString(playerid, p_tdRegisterAcc[playerid]{1}, tdstring);
 				PlayerTextDrawShow(playerid, p_tdRegisterAcc[playerid]{1});
@@ -197,7 +197,7 @@ hook OnPlayerClickPlayerTD(playerid, PlayerText:playertextid)
 				PlayerTextDrawSetString(playerid, p_tdRegisterAcc[playerid]{2}, Str_FixEncoding("Mostrar contraseña"));
 
 				new pwd[32];
-				memset(pwd, 'X', strlen(p_szPassword[playerid]));
+				MemSet(pwd, 'X', strlen(p_szPassword[playerid]));
 
 				PlayerTextDrawSetString(playerid, p_tdRegisterAcc[playerid]{1}, pwd);
 				PlayerTextDrawShow(playerid, p_tdRegisterAcc[playerid]{2});
@@ -323,7 +323,7 @@ hook OnPlayerClickTextDraw(playerid, Text:clickedid)
                 g_rgePlayerData[playerid][e_pDataCache] = MYSQL_INVALID_CACHE;
 
 				Bit_Set(Player_Flags(playerid), PFLAG_AUTHENTICATING, false);
-				memset(p_szPassword[playerid], '\0');
+				MemSet(p_szPassword[playerid], '\0');
 
 				inline const ScreenBlacked()
 				{
@@ -352,7 +352,7 @@ hook OnPlayerClickTextDraw(playerid, Text:clickedid)
 					if(Player_Rank(playerid))
 						Iter_Add(Admins, playerid);
 
-					Notification_Show(playerid, @f("Bienvenido a The Hood, %s. Tu última conexión fue el ~y~%s~w~.", Player_GetName(playerid), Player_GetLastConnection(playerid)));
+		            Notification_Show(playerid, @f("Bienvenido a The Hood, %s. Tu última conexión fue el ~y~%s~w~.", Player_GetName(playerid), Player_GetLastConnection(playerid)));
 				
                     Needs_ToggleBar(playerid, true);
                     Needs_StartUpdating(playerid);

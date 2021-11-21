@@ -15,8 +15,8 @@ Account_Register(playerid, Func:cb<> = F@_@:0)
 
 	inline const HashDone(string:hash[])
 	{
-		memset(p_szPassword[playerid], '\0');
-		strcpy(p_szPasswordHash[playerid], hash);
+		MemSet(p_szPassword[playerid], '\0');
+		StrCpy(p_szPasswordHash[playerid], hash);
 
 		inline const QueryDone()
 		{

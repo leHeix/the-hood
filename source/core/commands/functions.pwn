@@ -57,7 +57,7 @@ bool:Commands_GetDescription(const command[], destination[], length = sizeof(des
 	if(i == -1)
 		return false;
 
-	strcpy(destination, g_rgeCommandStore[i][e_szCommandDescription], length);
+	StrCpy(destination, g_rgeCommandStore[i][e_szCommandDescription], length);
 
 	return true;
 }
