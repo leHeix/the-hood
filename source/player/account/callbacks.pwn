@@ -61,12 +61,16 @@ hook OnPlayerConnect(playerid)
 	Player_GetIp(playerid) = GetPlayerRawIp(playerid);
 
 	Bit_Set(Player_Flags(playerid), PFLAG_AUTHENTICATING, true);
-
-	new query[65];
-
-    /* `SETTINGS_SET` >> 32 AS SETTINGS_SET_HI, `SETTINGS_SET` & 0b11111111111111111111111111111111 AS SETTINGS_SET_LO */
-	mysql_format(g_hDatabase, query, sizeof(query), "SELECT * FROM `PLAYERS` WHERE `NAME` = '%e';", Player_GetName(playerid));
-	mysql_tquery(g_hDatabase, query, !"OnPlayerDataFetched", !"i", playerid);
+    
+	mysql_format(g_hDatabase, YSI_UNSAFE_HUGE_STRING, YSI_UNSAFE_HUGE_LENGTH, "\
+        SELECT `PLAYERS`.*, `CONNECTION_LOGS`.`DATE` AS `LAST_CONNECTION` \
+        FROM `PLAYERS`, `CONNECTION_LOGS` \
+        WHERE `PLAYERS`.`NAME` = '%e'  \
+            AND `CONNECTION_LOGS`.`ACCOUNT_ID` = `PLAYERS`.`ID` \
+        ORDER BY `CONNECTION_LOGS`.`DATE` DESC \
+        LIMIT 1;\
+    ", Player_GetName(playerid));
+	mysql_tquery(g_hDatabase, YSI_UNSAFE_HUGE_STRING, !"OnPlayerDataFetched", !"i", playerid);
 
 	return 1;
 }

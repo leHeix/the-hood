@@ -288,3 +288,9 @@ CMD:text(playerid, const params[])
     Notification_ShowBeatingText(playerid, 20000, 0xED2B2B, 255, 100, "mamaguebo");
     return 1;
 }
+
+/*
+    SELECT `PLAYERS`.*, `CONNECTION_LOGS`.`DATE` 
+    FROM `PLAYERS`, `CONNECTION_LOGS` 
+    WHERE `PLAYERS`.`ID` = 17 AND `CONNECTION_LOGS`.`ACCOUNT_ID` = `PLAYERS`.`ID`;
+*/

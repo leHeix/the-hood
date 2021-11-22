@@ -358,7 +358,8 @@ hook OnPlayerClickTextDraw(playerid, Text:clickedid)
                     Needs_StartUpdating(playerid);
 
                     mysql_tquery(g_hDatabase, va_return("UPDATE `PLAYERS` SET `CURRENT_CONNECTION` = UNIX_TIMESTAMP() WHERE `ID` = %d LIMIT 1;", Player_AccountID(playerid)));
-                
+                    Account_RegisterConnection(playerid);
+                    
                     Bit_Set(Player_Flags(playerid), PFLAG_IN_GAME, true);
                 }
 				Transition_StartInline(using inline ScreenBlacked, playerid, 255, TRANSITION_IN);
