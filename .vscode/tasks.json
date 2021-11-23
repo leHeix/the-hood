@@ -18,6 +18,7 @@
 				"\"-icompiler\\include\"",
 				"\"-icompiler\\include\\YSI\"",
 				"\"-icompiler\\include\\YSI\\amx\"",
+				"\"-icompiler\\include\\tdw\"",
 				"\"-isource\"",
 				"\"-ogamemodes\\server.amx\""
 			],

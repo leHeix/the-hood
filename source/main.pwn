@@ -67,6 +67,9 @@ L1:
 #include <md-sort/md-sort>
 #include <td-string-width>
 #include <colandreas>
+#include <tdw/tdw_vmath>
+#include <tdw/tdw_vsa_data>
+#include <tdw/tdw_vyengine>
 
 #include <YSI_Coding\y_hooks>
 #include <YSI_Coding\y_inline>
@@ -103,6 +106,7 @@ DEFINE_HOOK_REPLACEMENT__(OnPlayer, OP);
 #include "server/enter_exits/header.pwn"
 #include "server/stores/header.pwn"
 #include "server/chat/header.pwn"
+#include "server/vehicles/header.pwn"
 #include "player/account/header.pwn"
 #include "player/needs/header.pwn"
 #include "player/auth/header.pwn"
@@ -118,6 +122,7 @@ DEFINE_HOOK_REPLACEMENT__(OnPlayer, OP);
 #include "server/enter_exits/functions.pwn"
 #include "server/stores/functions.pwn"
 #include "server/chat/functions.pwn"
+#include "server/vehicles/functions.pwn"
 #include "player/account/functions.pwn"
 #include "player/needs/functions.pwn"
 #include "player/auth/functions.pwn"
@@ -135,6 +140,7 @@ DEFINE_HOOK_REPLACEMENT__(OnPlayer, OP);
 #include "server/stores/callbacks.pwn"
 #include "server/stores/pizza/callbacks.pwn"
 #include "server/chat/callbacks.pwn"
+#include "server/vehicles/callbacks.pwn"
 #include "player/account/callbacks.pwn"
 #include "player/needs/callbacks.pwn"
 #include "player/auth/callbacks.pwn"
@@ -142,6 +148,7 @@ DEFINE_HOOK_REPLACEMENT__(OnPlayer, OP);
 // Commands
 //////////////
 #include "server/chat/commands.pwn"
+#include "server/vehicles/commands.pwn"
 #include "player/needs/commands.pwn"
 
 public OnGameModeInit()
@@ -288,9 +295,3 @@ CMD:text(playerid, const params[])
     Notification_ShowBeatingText(playerid, 20000, 0xED2B2B, 255, 100, "mamaguebo");
     return 1;
 }
-
-/*
-    SELECT `PLAYERS`.*, `CONNECTION_LOGS`.`DATE` 
-    FROM `PLAYERS`, `CONNECTION_LOGS` 
-    WHERE `PLAYERS`.`ID` = 17 AND `CONNECTION_LOGS`.`ACCOUNT_ID` = `PLAYERS`.`ID`;
-*/

@@ -8,7 +8,8 @@ new
 	Text:g_tdPlayerCustomization[20],
     Text:g_tdNeedBars[15],
     Text:g_tdNeedProgress[2],
-    Text:g_tdShops[12];
+    Text:g_tdShops[12],
+    Text:g_tdSpeedometer[6];
 
 new
 	PlayerText:p_tdTransition[MAX_PLAYERS char],
