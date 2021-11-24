@@ -63,7 +63,7 @@ enum eVehicleModelData
     e_iPrice
 };
 
-new g_rgeVehicleModelData[MAX_VEHICLE_MODELS + 1][eVehicleModelData] = {
+new const g_rgeVehicleModelData[MAX_VEHICLE_MODELS + 1][eVehicleModelData] = {
     { 100.0, 0 },           // 400
     { 50.0, 0 },            // 401 - Bravura
     { 100.0, 0 },
@@ -278,9 +278,18 @@ new g_rgeVehicleModelData[MAX_VEHICLE_MODELS + 1][eVehicleModelData] = {
     { 100.0, 0 }
 };
 
+new const g_rgiSellableVehicles[] = {
+    401, 410, 412, 418, 419, 426, 436, 458, 482, 491, 492, 507, 517, 516,
+    518, 534, 535, 536, 547, 567, 576, 461, 462, 522, 521
+};
+
+// Publics
 forward VEHICLE_UpdateSpeedometer(playerid);
 forward VEHICLE_ToggleEngineTimer(playerid, vehicleid);
 forward VEHICLE_Update(vehicleid);
+
+// Functions
+forward [70]Vehicle_MakeComponentsString(vehicleid);
 
 // lmao
 native mz@GetVehicleParamsEx(vehicleid, &engine = 0, &lights = 0, &alarm = 0, &doors = 0, &bonnet = 0, &boot = 0, &objective = 0) = GetVehicleParamsEx;

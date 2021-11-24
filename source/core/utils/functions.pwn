@@ -130,7 +130,7 @@ String:Str_FixEncoding_s(ConstStringTag:orig)
 RawIpToString(rawip)
 {
     static ip[16];
-    ip[0] = (rawip >> 24) & 0xFF;
+    ip[0] = (rawip >> 24);
     ip[1] = (rawip >> 16) & 0xFF;
     ip[2] = (rawip >>  8) & 0xFF;
     ip[3] = rawip & 0xFF;

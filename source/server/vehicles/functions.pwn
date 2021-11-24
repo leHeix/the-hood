@@ -149,6 +149,13 @@ Vehicle_ToggleEngine(vehicleid, engstate = VEHICLE_STATE_DEFAULT)
     return 1;
 }
 
+Vehicle_MakeComponentsString(vehicleid)
+{
+    new components[70], i;
+    format(components, sizeof(components), "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d", PP_LOOP<14>(Vehicle_GetData(vehicleid, e_iComponents)[i++])(,));
+    return components;
+}
+
 Player_RegisterVehicle(playerid, vehicleid)
 {
 #if defined DEBUG_MODE
@@ -174,22 +181,19 @@ Player_RegisterVehicle(playerid, vehicleid)
     params |= (boot << 5);
     params |= (objective << 6);
 
-    new components[70], i;
-    format(components, sizeof(components), "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d", PP_LOOP<14>(Vehicle_GetData(vehicleid, e_iComponents)[i++])(,));
-
     mysql_format(g_hDatabase, YSI_UNSAFE_HUGE_STRING, YSI_UNSAFE_HUGE_LENGTH, "\
         INSERT INTO `PLAYER_VEHICLES` \
-            (OWNER_ID, MODEL, HEALTH, PANELS_STATUS, DOORS_STATUS, LIGHTS_STATUS, TIRES_STATUS, COLOR_ONE, COLOR_TWO, PAINTJOB, POS_X, POS_Y, POS_Z, ANGLE, INTERIOR, VW, COMPONENTS, PARAMS) \
+            (OWNER_ID, MODEL, HEALTH, FUEL, PANELS_STATUS, DOORS_STATUS, LIGHTS_STATUS, TIRES_STATUS, COLOR_ONE, COLOR_TWO, PAINTJOB, POS_X, POS_Y, POS_Z, ANGLE, INTERIOR, VW, COMPONENTS, PARAMS) \
         VALUES \
-            (%d, %d, %f, %d, %d, %d, %d, %d, %d, %d, %f, %f, %f, %f, %d, %d, '%s', %d);\
+            (%d, %d, %f, %f, %d, %d, %d, %d, %d, %d, %d, %f, %f, %f, %f, %d, %d, '%s', %d);\
     ",
         Player_AccountID(playerid),
         GetVehicleModel(vehicleid),
-        Vehicle_GetData(vehicleid, e_fHealth), panels, doors, lights, tires,
+        Vehicle_GetData(vehicleid, e_fHealth), Vehicle_GetData(vehicleid, e_fFuel), panels, doors, lights, tires,
         Vehicle_GetData(vehicleid, e_iColorOne), Vehicle_GetData(vehicleid, e_iColorTwo), Vehicle_GetData(vehicleid, e_iPaintjob),
         Vehicle_GetData(vehicleid, e_fPosX), Vehicle_GetData(vehicleid, e_fPosY), Vehicle_GetData(vehicleid, e_fPosZ), Vehicle_GetData(vehicleid, e_fPosAngle),
         Vehicle_GetData(vehicleid, e_iVehInterior), Vehicle_GetData(vehicleid, e_iVehWorld),
-        components, params
+        Vehicle_MakeComponentsString(vehicleid), params
     );
 
     mysql_tquery(g_hDatabase, YSI_UNSAFE_HUGE_STRING);
@@ -227,9 +231,6 @@ Player_SaveVehicles(playerid)
         params |= (boot << 4);
         params |= (objective << 5);
 
-        new components[70], i;
-        format(components, sizeof(components), "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d", PP_LOOP<14>(Vehicle_GetData(v, e_iComponents)[i++])(,));
-
         mysql_format(g_hDatabase, YSI_UNSAFE_HUGE_STRING, YSI_UNSAFE_HUGE_LENGTH, "\
             UPDATE `PLAYER_VEHICLES` SET \
                 HEALTH = %.2f, \
@@ -255,7 +256,7 @@ Player_SaveVehicles(playerid)
             Vehicle_GetData(v, e_iColorOne), Vehicle_GetData(v, e_iColorTwo), Vehicle_GetData(v, e_iPaintjob),
             Vehicle_GetData(v, e_fPosX), Vehicle_GetData(v, e_fPosY), Vehicle_GetData(v, e_fPosZ), Vehicle_GetData(v, e_fPosAngle),
             Vehicle_GetData(v, e_iVehInterior), Vehicle_GetData(v, e_iVehWorld),
-            components,
+            Vehicle_MakeComponentsString(v),
             params,
             Vehicle_GetData(v, e_iVehicleDbId)
         );
