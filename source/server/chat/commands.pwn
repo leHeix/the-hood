@@ -7,8 +7,7 @@ command decir(playerid, const params[], "Envia un mensaje como tu personaje")
 {
     if(g_rgiPlayerLastMessageTick[playerid] > GetTickCount())
     {
-        SendClientMessagef(playerid, 0xDADADAFF, "Solo puedes enviar {ED2B2B}un mensaje {DADADA}cada {ED2B2B}%.2f segundos{DADADA}.", floatdiv(CHAT_MESSAGE_DELAY, 1000));
-        return 0;
+        return va_SendClientMessage(playerid, 0xDADADAFF, "Solo puedes enviar {ED2B2B}un mensaje {DADADA}cada {ED2B2B}%.2f segundos{DADADA}.", floatdiv(CHAT_MESSAGE_DELAY, 1000));
     }
 
     new text[192];
@@ -28,8 +27,8 @@ command decir(playerid, const params[], "Envia un mensaje como tu personaje")
     
     Player_SendLocalMessage(playerid, -1, 15.0, text);
 
-    new short[20];
-    format(short, sizeof(short), "%.15s%s", text, (strlen(text) > 15 ? "..." : ""));
+    new short[35];
+    format(short, sizeof(short), "%.35s%s", text, (strlen(text) > 30 ? "..." : ""));
 
     SetPlayerChatBubble(playerid, short, -1, 5.0, 5000);
 
@@ -43,8 +42,7 @@ command ooc(playerid, const params[], "Envia un mensaje al canal fuera de rol")
 {
     if(g_rgiPlayerLastMessageTick[playerid] > GetTickCount())
     {
-        SendClientMessagef(playerid, 0xDADADAFF, "Solo puedes enviar {ED2B2B}un mensaje {DADADA}cada {ED2B2B}%.2f segundos{DADADA}.", floatdiv(CHAT_MESSAGE_DELAY, 1000));
-        return 0;
+        return va_SendClientMessage(playerid, 0xDADADAFF, "Solo puedes enviar {ED2B2B}un mensaje {DADADA}cada {ED2B2B}%.2f segundos{DADADA}.", floatdiv(CHAT_MESSAGE_DELAY, 1000));
     }
 
     new text[192];
@@ -60,8 +58,8 @@ command ooc(playerid, const params[], "Envia un mensaje al canal fuera de rol")
     format(text, sizeof(text), "%s: (( %s ))", Player_RPName(playerid), text);
     Player_SendLocalMessage(playerid, 0xABABABFF, 15.0, text);
 
-    new short[25];
-    format(short, sizeof(short), "(( %.15s%s ))", text, (strlen(text) > 15 ? "..." : ""));
+    new short[40];
+    format(short, sizeof(short), "(( %.30s%s ))", text, (strlen(text) > 30 ? "..." : ""));
 
     SetPlayerChatBubble(playerid, short, 0xABABABFF, 5.0, 5000);
 
@@ -75,8 +73,7 @@ command gritar(playerid, const params[], "Envia un grito como tu personaje")
 {
     if(g_rgiPlayerLastMessageTick[playerid] > GetTickCount())
     {
-        SendClientMessagef(playerid, 0xDADADAFF, "Solo puedes enviar {ED2B2B}un mensaje {DADADA}cada {ED2B2B}%.2f segundos{DADADA}.", floatdiv(CHAT_MESSAGE_DELAY, 1000));
-        return 0;
+        return va_SendClientMessage(playerid, 0xDADADAFF, "Solo puedes enviar {ED2B2B}un mensaje {DADADA}cada {ED2B2B}%.2f segundos{DADADA}.", floatdiv(CHAT_MESSAGE_DELAY, 1000));
     }
 
     new text[192];
@@ -96,8 +93,8 @@ command gritar(playerid, const params[], "Envia un grito como tu personaje")
     
     Player_SendLocalMessage(playerid, -1, 30.0, text);
 
-    new short[25];
-    format(short, sizeof(short), "!! %.15s%s", text, (strlen(text) > 15 ? "..." : ""));
+    new short[40];
+    format(short, sizeof(short), "!! %.30s%s", text, (strlen(text) > 30 ? "..." : ""));
 
     SetPlayerChatBubble(playerid, short, -1, 10.0, 5000);
 
@@ -111,8 +108,7 @@ command me(playerid, const params[], "Ejecuta una acción dentro de rol")
 {
     if(g_rgiPlayerLastMessageTick[playerid] > GetTickCount())
     {
-        SendClientMessagef(playerid, 0xDADADAFF, "Solo puedes enviar {ED2B2B}un mensaje {DADADA}cada {ED2B2B}%.2f segundos{DADADA}.", floatdiv(CHAT_MESSAGE_DELAY, 1000));
-        return 0;
+        return va_SendClientMessage(playerid, 0xDADADAFF, "Solo puedes enviar {ED2B2B}un mensaje {DADADA}cada {ED2B2B}%.2f segundos{DADADA}.", floatdiv(CHAT_MESSAGE_DELAY, 1000));
     }
     
     new action[128];
@@ -132,7 +128,7 @@ command do(playerid, const params[], "Indica el entorno actual")
 {
     if(g_rgiPlayerLastMessageTick[playerid] > GetTickCount())
     {
-        SendClientMessagef(playerid, 0xDADADAFF, "Solo puedes enviar {ED2B2B}un mensaje {DADADA}cada {ED2B2B}%.2f segundos{DADADA}.", floatdiv(CHAT_MESSAGE_DELAY, 1000));
+        va_SendClientMessage(playerid, 0xDADADAFF, "Solo puedes enviar {ED2B2B}un mensaje {DADADA}cada {ED2B2B}%.2f segundos{DADADA}.", floatdiv(CHAT_MESSAGE_DELAY, 1000));
         return 0;
     }
 

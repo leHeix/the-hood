@@ -111,7 +111,7 @@ public NOTIFICATION_ProcessText(playerid, time, alpha_min, alpha_max, bool:shoul
         {
             td_phase{playerid} = true;
         }
-        else if(current_alpha >= alpha_max)
+        else if (current_alpha >= alpha_max)
         {
             td_phase{playerid} = false;
         }

@@ -21,7 +21,7 @@ hook native SelectTextDraw(playerid, hovercolor)
 
 hook native CancelSelectTextDraw(playerid)
 {
-    s_rgiCancelTick[playerid] = GetTickCount() + 100;
+    s_rgiCancelTick[playerid] = GetTickCount() + (50 + GetPlayerPing(playerid));
     return continue(playerid);
 }
 

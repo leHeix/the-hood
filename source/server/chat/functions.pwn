@@ -36,9 +36,9 @@ Player_SendLocalMessage(playerid, color, Float:range, const message[])
         new color_relative = (255 - floatround(distance * 3.0));
         new color_darkened = Color_Darken(color, color_relative);
         
-        SendClientMessage(playerid, color_darkened, messages[0]);
+        SendClientMessage(i, color_darkened, messages[0]);
         if(!isnull(messages[1]))
-            SendClientMessage(playerid, color_darkened, messages[1]);
+            SendClientMessage(i, color_darkened, messages[1]);
     }
 
     SendClientMessage(playerid, color, messages[0]);

@@ -89,6 +89,11 @@ _Notification_HideAll(playerid, index)
 
 Notification_ShowBeatingText(playerid, time, colour, alpha_max, alpha_min, const text[])
 {
+    if(g_rgiTextProcessTimer[playerid])
+    {
+        KillTimer(g_rgiTextProcessTimer[playerid]);
+    }
+    
     new string[128];
     strcat(string, Str_FixEncoding(text));
 

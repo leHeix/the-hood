@@ -30,8 +30,8 @@ hook OnPlayerText(playerid, text[])
     
     Player_SendLocalMessage(playerid, -1, 15.0, message);
 
-    new short[20];
-    format(short, sizeof(short), "%.15s...", text);
+    new short[35];
+    format(short, sizeof(short), "%.30s%s", text, (strlen(text) > 30 ? "..." : ""));
 
     SetPlayerChatBubble(playerid, short, -1, 5.0, 5000);
 

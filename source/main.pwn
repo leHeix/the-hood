@@ -67,9 +67,6 @@ L1:
 #include <md-sort/md-sort>
 #include <td-string-width>
 #include <colandreas>
-#include <tdw/tdw_vmath>
-#include <tdw/tdw_vsa_data>
-#include <tdw/tdw_vyengine>
 
 #include <YSI_Coding\y_hooks>
 #include <YSI_Coding\y_inline>
@@ -83,6 +80,9 @@ L1:
 #include <YSI_Game\y_vehicledata>
 #include <YSI_Server\y_scriptinit>
 #include <YSI_Visual\y_dialog>
+
+#include <tdw/tdw_vmath>
+#include <tdw/tdw_vsa_data>
 
 DEFINE_HOOK_REPLACEMENT__(OnPlayer, OP);
 

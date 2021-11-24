@@ -28,3 +28,22 @@ command veh(playerid, const params[], "Invoca un vehículo en tu posición")
 }
 alias:veh("v")
 flags:veh(CMD_ADMIN<RANK_LEVEL_GAME_OPERATOR>)
+
+command give_veh(playerid, const params[], "Registra un vehículo para un jugador")
+{
+    new destination_player, vehicle = INVALID_VEHICLE_ID;
+    if(sscanf(params, "ri", destination_player, vehicle) || !IsValidVehicle(vehicle))
+    {
+        return SendClientMessage(playerid, 0xDADADAFF, "USO: {ED2B2B}/give_veh {DADADA}<jugador> <id vehículo>");
+    }
+
+    if(Player_RegisterVehicle(destination_player, vehicle))
+    {
+        new model[50];
+        GetModelStaticNameFromId(GetVehicleModel(vehicle), model);
+        va_SendClientMessage(playerid, 0xED2B2BFF, "{ED2B2B}› {DADADA}Se registró un {ED2B2B}%s {DADADA}en la cuenta de {ED2B2B}%s{DADADA}.", model);
+    }
+
+    return 1;
+}
+flags:give_veh(CMD_ADMIN<RANK_LEVEL_ADMIN>)
