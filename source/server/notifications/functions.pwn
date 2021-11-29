@@ -12,9 +12,6 @@ Float:EaseInOutBack(Float:x)
 	: (floatpower(2.0 * x - 2.0, 2.0) * ((c2 + 1.0) * (x * 2.0 - 2.0) + c2) + 2.0) / 2.0;
 }
 
-Float:lerp(Float:p1, Float:p2, Float:t)
-	return p1 + (p2 - p1) * t;
-
 Notification_Show(playerid, String:text, time = 2000)
 {
 	new String:fixed_string = Str_FixEncoding_s(text);

@@ -5,6 +5,7 @@
 
 #define PP_SYNTAX_@
 #define PP_SYNTAX_STRING_OP
+#define PP_SYNTAX_FOR_LIST
 #define YSI_NO_OBNOXIOUS_HEADER
 #define YSI_NO_ANDROID_CHECK
 #define YSI_NO_VERSION_CHECK
@@ -74,10 +75,11 @@ L1:
 #include <YSI_Coding\y_va>
 #include <YSI_Core\y_utils>
 #include <YSI_Data\y_bit>
+//#include <YSI_Data\y_circular>
 #include <YSI_Data\y_iterate>
 #include <YSI_Data\y_sparsearray>
 #include <YSI_Extra\y_inline_mysql>
-#include <YSI_Game\y_vehicledata>
+//#include <YSI_Game\y_vehicledata>
 #include <YSI_Server\y_scriptinit>
 #include <YSI_Visual\y_dialog>
 
@@ -107,9 +109,11 @@ DEFINE_HOOK_REPLACEMENT__(OnPlayer, OP);
 #include "server/stores/header.pwn"
 #include "server/chat/header.pwn"
 #include "server/vehicles/header.pwn"
+#include "server/chatbuffer/header.pwn"
 #include "player/account/header.pwn"
 #include "player/needs/header.pwn"
 #include "player/auth/header.pwn"
+#include "player/keygame/header.pwn"
 
 // Functions
 ///////////////
@@ -123,9 +127,11 @@ DEFINE_HOOK_REPLACEMENT__(OnPlayer, OP);
 #include "server/stores/functions.pwn"
 #include "server/chat/functions.pwn"
 #include "server/vehicles/functions.pwn"
+#include "server/chatbuffer/functions.pwn"
 #include "player/account/functions.pwn"
 #include "player/needs/functions.pwn"
 #include "player/auth/functions.pwn"
+#include "player/keygame/functions.pwn"
 
 // Callbacks
 ///////////////
@@ -141,9 +147,11 @@ DEFINE_HOOK_REPLACEMENT__(OnPlayer, OP);
 #include "server/stores/pizza/callbacks.pwn"
 #include "server/chat/callbacks.pwn"
 #include "server/vehicles/callbacks.pwn"
+#include "server/chatbuffer/callbacks.pwn"
 #include "player/account/callbacks.pwn"
 #include "player/needs/callbacks.pwn"
 #include "player/auth/callbacks.pwn"
+#include "player/keygame/callbacks.pwn"
 
 // Commands
 //////////////
@@ -293,5 +301,37 @@ public OnPlayerEditObject(playerid, playerobject, objectid, response, Float:fX, 
 CMD:text(playerid, const params[])
 {
     Notification_ShowBeatingText(playerid, 20000, 0xED2B2B, 255, 100, "mamaguebo");
+    return 1;
+}
+
+CMD:keygame(playerid, const params[])
+{
+    TogglePlayerControllable(playerid, false);
+
+    inline const KeyGame(bool:success)
+    {
+        if(success)
+        {
+            SendClientMessage(playerid, -1, "felisidades pasaste el juego de las teklas");
+        }
+        else
+        {
+            SendClientMessage(playerid, -1, "maldito sonso perdistes");
+        }
+
+        TogglePlayerControllable(playerid, true);
+    }
+    Player_StartKeyGame(playerid, using inline KeyGame);
+
+    return 1;
+}
+
+CMD:resend_chat(playerid, const params[])
+{
+    ChatBuffer_Unhook();
+    SendClientMessage(playerid, -1, "Resending messages... (except this one)");
+    ChatBuffer_Rehook();
+    
+    Player_ResendChat(playerid);
     return 1;
 }

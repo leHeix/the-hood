@@ -37,11 +37,15 @@ public SHIT_StepOne(playerid, objectid)
 {
     new Float:x, Float:y, Float:z;
     GetPlayerPos(playerid, x, y, z);
-    CA_FindZ_For2DCoord(x, y, z);
 
     new
         vw = GetPlayerVirtualWorld(playerid),
         int = GetPlayerInterior(playerid);
+
+    if(int != 0)
+        z -= 0.5;
+    else
+        CA_FindZ_For2DCoord(x, y, z);
 
     DestroyDynamicObject(objectid);
     new fx = CreateDynamicObject(18678, x, y, z, 0.0, 0.0, 0.0, .worldid = vw, .interiorid = int); // fart effect

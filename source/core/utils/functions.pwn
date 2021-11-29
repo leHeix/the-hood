@@ -267,7 +267,7 @@ DelayedKick(playerid, time = 250)
     return 1;
 }
 
-binary_search(const arr[], value, low = 0, high = sizeof(arr))
+stock binary_search(const arr[], value, low = 0, high = sizeof(arr))
 {
     --high;
     
@@ -284,4 +284,12 @@ binary_search(const arr[], value, low = 0, high = sizeof(arr))
     }
 
     return -1;
+}
+
+Float:lerp(Float:p1, Float:p2, Float:t)
+	return p1 + (p2 - p1) * t;
+
+Float:fclamp(Float:v, Float:min, Float:max)
+{
+    return (v < min ? min : (v > max ? max : v));
 }

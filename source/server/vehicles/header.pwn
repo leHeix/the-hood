@@ -278,10 +278,15 @@ new const g_rgeVehicleModelData[MAX_VEHICLE_MODELS + 1][eVehicleModelData] = {
     { 100.0, 0 }
 };
 
-new const g_rgiSellableVehicles[] = {
+new const g_rgiBuyableVehicles[] = {
     401, 410, 412, 418, 419, 426, 436, 458, 482, 491, 492, 507, 517, 516,
     518, 534, 535, 536, 547, 567, 576, 461, 462, 522, 521
 };
+
+new
+    g_rgiAutoDealershipArea,
+    g_rgiDealershipVehicles[MAX_PLAYERS] = { INVALID_VEHICLE_ID, ... },
+    g_rgiDealershipSelectedVehicle[MAX_PLAYERS char];
 
 // Publics
 forward VEHICLE_UpdateSpeedometer(playerid);
@@ -296,3 +301,4 @@ native mz@GetVehicleParamsEx(vehicleid, &engine = 0, &lights = 0, &alarm = 0, &d
 
 #define Vehicle_GetData(%0,%1) g_rgeVehicles[(%0)][(%1)]
 #define Vehicle_GetModelData(%0,%1) g_rgeVehicleModelData[(GetVehicleModel((%0)) - 400)][(%1)]
+#define Model_GetData(%0,%1) g_rgeVehicleModelData[(%0) - 400][(%1)]
