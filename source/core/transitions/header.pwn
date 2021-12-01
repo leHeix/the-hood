@@ -1,22 +1,26 @@
 #if defined _H_TRANSITIONS_
-	#endinput
+    #endinput
 #endif
 #define _H_TRANSITIONS_
 
-enum eTransitionData 
+enum eTransitionData
 {
-    e_iTransitionTimer,
-    Func:e_iTransitionCallback<>,
-    e_iTransitionTaskCount,
-    bool:e_bTransitionTaskIn,
-    bool:e_bTransitionIn
+    bool:e_bActive,
+    bool:e_bPaused,
+    e_iEndOpacity,
+    Func:e_pCallback<>,
+    bool:e_bTransitionIn,
+    e_iUpdateTimer
 };
 
-new p_rgeTransitionData[MAX_PLAYERS + 1][eTransitionData];
+#define TRANSITION_IN (true)
+#define TRANSITION_OUT (false)
 
-const bool:TRANSITION_IN = true;
-const bool:TRANSITION_OUT = false;
+new g_rgeTransitionData[MAX_PLAYERS + 1][eTransitionData];
 
-#define Transition_IsActive(%0) (IsPlayerTextDrawVisible(%0, p_tdTransition{%0}))
+forward Transition_StartInline(Func:cb<>, playerid, count, bool:in);
+forward Transition_Stop(playerid);
+forward Transition_Pause(playerid);
+forward Transition_Resume(playerid);
 
-forward TRANSITION_Process(playerid, bool:in, task_count, bool:task_in);
+forward TRANSITION_Process(playerid);

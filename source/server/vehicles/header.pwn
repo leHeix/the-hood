@@ -293,9 +293,6 @@ forward VEHICLE_UpdateSpeedometer(playerid);
 forward VEHICLE_ToggleEngineTimer(playerid, vehicleid);
 forward VEHICLE_Update(vehicleid);
 
-// Functions
-forward [70]Vehicle_MakeComponentsString(vehicleid);
-
 // lmao
 native mz@GetVehicleParamsEx(vehicleid, &engine = 0, &lights = 0, &alarm = 0, &doors = 0, &bonnet = 0, &boot = 0, &objective = 0) = GetVehicleParamsEx;
 

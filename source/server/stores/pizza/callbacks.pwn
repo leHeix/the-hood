@@ -27,6 +27,8 @@ static Pizza_OnBuy(shop_id, playerid, item_id)
         }
     }
 
+    Needs_UpdateTextDraws(playerid, true);
+
     ++g_rgePlayerData[playerid][e_iPlayerEatCount];
 
     if(g_rgePlayerData[playerid][e_iPlayerEatCount] >= 5)
@@ -45,6 +47,9 @@ hook OnGameModeInit()
 
     // EnExs
     EnterExit_Create(19902, "{ED2B2B}Ugi's Pizza\n{DADADA}Presiona {ED2B2B}H {DADADA}para entrar", "{DADADA}Presiona {ED2B2B}H {DADADA}para salir", 2105.0681, -1806.4565, 13.5547, 91.9755, 0, 0, 372.4150, -133.3214, 1001.4922, 355.1316, 1, 5, -1, 0);
+
+    // MapIcons
+    CreateDynamicMapIcon(2105.0681, -1806.4565, 13.5547, 29, -1, .worldid = 0, .interiorid = 0);
     
     // Shops
     new ugis = Shop_Create("Ugi's Pizza", 373.7325, -119.4309, 1001.4922, -1, 5, 372.986755, -118.988250, 1002.399780, 375.441986, -115.871269, 999.357360, __addressof(Pizza_OnBuy));

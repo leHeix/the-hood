@@ -1,54 +1,36 @@
-#if defined _TRANSITIONS_CALLBACKS_
-	#endinput
+#if defined _CALLBACKS_TRANSITIONS_
+    #endinput
 #endif
-#define _TRANSITIONS_CALLBACKS_
+#define _CALLBACKS_TRANSITIONS_
 
-static RunTransitionCallback(playerid, count, bool:in, task_count, bool:task_in)
+public TRANSITION_Process(playerid)
 {
-	if(p_rgeTransitionData[playerid][e_iTransitionCallback] != Func:0<> && in == task_in && count == task_count)
-	{
-		new Func:fun<> = p_rgeTransitionData[playerid][e_iTransitionCallback];
-		p_rgeTransitionData[playerid][e_iTransitionCallback] = Func:0<>;
+    new colour = PlayerTextDrawGetBoxColor(playerid, p_tdTransition{playerid});
+    new alpha = (colour & 0xFF);
 
-		@.fun();
+    alpha = clamp((g_rgeTransitionData[playerid][e_bTransitionIn] ? alpha + 5 : alpha - 5), 0, 255);
+    if(alpha == 255)
+    {
+        g_rgeTransitionData[playerid][e_bTransitionIn] = false;
+    }
+    else if(!alpha)
+    {
+        Transition_Stop(playerid);
+        return 1;
+    }
 
-		Indirect_Release(fun);
-	}
+    colour = RGBA_SetAlpha(colour, alpha);
 
-	return 0;
-}
+    PlayerTextDrawBoxColor(playerid, p_tdTransition{playerid}, colour);
+    PlayerTextDrawShow(playerid, p_tdTransition{playerid});
 
-public TRANSITION_Process(playerid, bool:in, task_count, bool:task_in)
-{	
-	new count = PlayerTextDrawGetBoxColor(playerid, p_tdTransition{playerid});
-
-	if(in)
-	{
-		count += 5;
-		PlayerTextDrawBoxColor(playerid, p_tdTransition{playerid}, count);
-
-		if(count >= 260)
-		{
-			KillTimer(p_rgeTransitionData[playerid][e_iTransitionTimer]);
-			p_rgeTransitionData[playerid][e_bTransitionIn] = true;
-			p_rgeTransitionData[playerid][e_iTransitionTimer] = SetTimerEx(!"TRANSITION_Process", 30, true, "iiii", playerid, false, task_count, task_in);
-		}
-	}
-	else
-	{
-		count -= 5;
-		PlayerTextDrawBoxColor(playerid, p_tdTransition{playerid}, count);
-
-		if(count <= 0)
-		{
-			RunTransitionCallback(playerid, count, in, task_count, task_in);
-			Transition_Stop(playerid);
-			return 0;
-		}
-	}
-
-	PlayerTextDrawShow(playerid, p_tdTransition{playerid});
-	RunTransitionCallback(playerid, count, in, task_count, task_in);
-
-	return 1;
+    if(g_rgeTransitionData[playerid][e_pCallback] && alpha == g_rgeTransitionData[playerid][e_iEndOpacity])
+    {
+        new Func:cb<> = g_rgeTransitionData[playerid][e_pCallback];
+        g_rgeTransitionData[playerid][e_pCallback] = Func:0<>;
+        @.cb();
+        Indirect_Release(cb);
+    }
+    
+    return 1;
 }

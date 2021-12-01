@@ -29,6 +29,8 @@ EnterExit_Create(pickup_model, const enter_text[], const exit_text[], Float:ente
     info[1] = i; // EnEx ID
     info[2] = 1; // Enter
 
+    g_rgeEnterExits[i][e_bValid] = true;
+    
     // Enter
     g_rgeEnterExits[i][e_fEnterX] = enter_x;
     g_rgeEnterExits[i][e_fEnterY] = enter_y;

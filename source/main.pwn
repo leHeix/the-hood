@@ -73,14 +73,14 @@ L1:
 #include <YSI_Coding\y_inline>
 #include <YSI_Coding\y_stringhash>
 #include <YSI_Coding\y_va>
+#include <YSI_Core\y_compilerdata>
 #include <YSI_Core\y_utils>
 #include <YSI_Data\y_bit>
-//#include <YSI_Data\y_circular>
 #include <YSI_Data\y_iterate>
 #include <YSI_Data\y_sparsearray>
 #include <YSI_Extra\y_inline_mysql>
-//#include <YSI_Game\y_vehicledata>
 #include <YSI_Server\y_scriptinit>
+#include <YSI_Storage\y_amx> // For init functions, e.g. core/commands/callbacks
 #include <YSI_Visual\y_dialog>
 
 #include <tdw/tdw_vmath>
@@ -152,6 +152,7 @@ DEFINE_HOOK_REPLACEMENT__(OnPlayer, OP);
 #include "player/needs/callbacks.pwn"
 #include "player/auth/callbacks.pwn"
 #include "player/keygame/callbacks.pwn"
+#include "server/jobs/gunman/callbacks.pwn"
 
 // Commands
 //////////////

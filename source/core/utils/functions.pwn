@@ -289,7 +289,12 @@ stock binary_search(const arr[], value, low = 0, high = sizeof(arr))
 Float:lerp(Float:p1, Float:p2, Float:t)
 	return p1 + (p2 - p1) * t;
 
+/*
 Float:fclamp(Float:v, Float:min, Float:max)
 {
     return (v < min ? min : (v > max ? max : v));
 }
+*/
+#if !defined fclamp
+    #define fclamp(%0,%1,%2) ((%0) < (%1) ? (%1) : ((%0) > (%2) ? (%2) : (%0)))
+#endif

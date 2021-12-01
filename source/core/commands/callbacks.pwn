@@ -7,27 +7,18 @@
 
 hook OnScriptInit()
 {
-    new hdr[AMX_HDR];
-    GetAmxHeader(hdr);
-
-    new pubname[32];
-    for(new i = GetNumPublics(hdr); i != -1; --i)
+    new idx, ptr;
+    while ((idx = AMX_GetPublicPointerPrefix(idx, ptr, _A<mz@cmd_>)))
     {
-        if(!GetPublicNameFromIndex(i, pubname))
-            continue;
-        
-        if(!strcmp("mz@cmd_", pubname, true, 7))
+        __emit 
         {
-            new addr = GetPublicAddressFromIndex(i);
-            __emit {
-                push.c 0
-                lctrl 6
-                add.c 0x24
-                lctrl 8
-                push.pri
-                load.s.pri addr
-                sctrl 6
-            }
+            push.c 0
+            lctrl 6
+            add.c 36
+            lctrl 8
+            push.pri
+            load.s.pri ptr
+            sctrl 6
         }
     }
 

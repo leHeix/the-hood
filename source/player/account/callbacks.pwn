@@ -29,20 +29,21 @@ public OnPlayerDataFetched(playerid)
 hook OnPlayerConnect(playerid)
 {
 	new len = GetPlayerName(playerid, Player_GetName(playerid), MAX_PLAYER_NAME);
+
+    new String:tmp = str_new_arr(Player_GetName(playerid), len + 1);
+    if(!str_match(tmp, "[A-Z]{1}[a-zA-Z]+_{1}[A-Z]{1}[a-zA-Z]+", .options = regex_cached))
     {
-        new String:tmp = str_new_arr(Player_GetName(playerid), len + 1);
-        if(!str_match(tmp, "[A-Z]{1}[a-zA-Z]+_{1}[A-Z]{1}[a-zA-Z]+", .options = regex_cached))
-        {
-            Dialog_Show(
-                playerid, DIALOG_STYLE_MSGBOX, 
-                "{DADADA}Nombre {ED2B2B}inválido", 
-                "{DADADA}Tu cuenta no puede ser registrada con un nombre inválido. Para entrar al servidor, tu nombre debe seguir el siguiente patrón:\n\n\t\"{ED2B2B}^[A-Z][a-zA-Z]+_{1}[A-Z][a-zA-Z]+${DADADA}\"",
-                "Entendido", ""
-            );
-            DelayedKick(playerid);
-            return ~1;
-        }
+        Dialog_Show(
+            playerid, DIALOG_STYLE_MSGBOX, 
+            "{DADADA}Nombre {ED2B2B}inválido", 
+            "{DADADA}Tu cuenta no puede ser registrada con un nombre inválido. Para entrar al servidor, tu nombre debe seguir el siguiente patrón:\n\n\t\"Nombre_Apellido\"",
+            "Entendido", ""
+        );
+        DelayedKick(playerid);
+        return ~1;
     }
+
+    str_delete(tmp);
 
     EnablePlayerCameraTarget(playerid, true);
 
@@ -57,6 +58,28 @@ hook OnPlayerConnect(playerid)
             g_rgePlayerData[playerid][e_szPlayerFixedName][i] = g_rgePlayerData[playerid][e_szPlayerName][i];
         }
     }
+    
+    /*
+    // RPC_SetPlayerName
+    SendRPC(-1, 11,
+        BS_UNSIGNEDSHORT, playerid,
+        BS_UNSIGNEDCHAR, strlen(Player_RPName(playerid)),
+        BS_STRING, Player_RPName(playerid),
+        BS_UNSIGNEDCHAR, 1
+    );
+
+    foreach(new i : Player)
+    {
+        SendRPC(playerid, 11,
+            BS_UNSIGNEDSHORT, i,
+            BS_UNSIGNEDCHAR, strlen(Player_RPName(i)),
+            BS_STRING, Player_RPName(i),
+            BS_UNSIGNEDCHAR, 1
+        );
+    }
+    */
+
+    SetPlayerNameInServerQuery(playerid, Player_RPName(playerid));
 
 	Player_GetIp(playerid) = GetPlayerRawIp(playerid);
 
@@ -96,7 +119,7 @@ hook OPPauseStateChange(playerid, pausestate)
 	}
 	else if(g_rgePlayerData[playerid][e_iPlayerPausedBegin] != 0)
 	{
-		g_rgePlayerData[playerid][e_iPlayerPausedTime] = (gettime() - g_rgePlayerData[playerid][e_iPlayerPausedBegin]);
+		g_rgePlayerData[playerid][e_iPlayerPausedTime] += (gettime() - g_rgePlayerData[playerid][e_iPlayerPausedBegin]);
 		g_rgePlayerData[playerid][e_iPlayerPausedBegin] = 0;
 	}
 
@@ -108,5 +131,6 @@ hook OnPlayerSpawn(playerid)
     ApplyAnimation(playerid, "PED", "null", 4.1, false, false, false, false, 0, 0);
     ApplyAnimation(playerid, "SMOKING", "null", 4.1, false, false, false, false, 0, 0);
     ApplyAnimation(playerid, "CRIB", "null", 4.1, false, false, false, false, 0, 0);
+    ApplyAnimation(playerid, "FOOD", "null", 4.1, false, false, false, false, 0, 0);
     return 1;
 }

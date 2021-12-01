@@ -41,7 +41,7 @@ command give_veh(playerid, const params[], "Registra un vehículo para un jugador
     {
         new model[50];
         GetModelStaticNameFromId(GetVehicleModel(vehicle), model);
-        va_SendClientMessage(playerid, 0xED2B2BFF, "{ED2B2B}› {DADADA}Se registró un {ED2B2B}%s {DADADA}en la cuenta de {ED2B2B}%s{DADADA}.", model);
+        va_SendClientMessage(playerid, 0xED2B2BFF, "{ED2B2B}› {DADADA}Se registró un {ED2B2B}%s {DADADA}en la cuenta de {ED2B2B}%s{DADADA}.", model, Player_RPName(destination_player));
     }
 
     return 1;

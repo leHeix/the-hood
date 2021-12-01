@@ -27,7 +27,7 @@ Config_Load()
 		return 0;
 	}
 
-	if(flength(cfile) != (eServerData * cellbytes))
+	if(flength(cfile) != (eServerData << __COMPILER_CELL_SHIFT))
 	{
 		print("[!] El archivo de configuración guardado no es compatible.");
 		fclose(cfile);
