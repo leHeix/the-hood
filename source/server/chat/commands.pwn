@@ -5,7 +5,7 @@
 
 command decir(playerid, const params[], "Envia un mensaje como tu personaje")
 {
-    if(GetTickDiff(GetTickCount(), g_rgiPlayerLastMessageTick[playerid]) > CHAT_MESSAGE_DELAY)
+    if(g_rgiPlayerLastMessageTick[playerid] && GetTickDiff(GetTickCount(), g_rgiPlayerLastMessageTick[playerid]) < CHAT_MESSAGE_DELAY)
     {
         return va_SendClientMessage(playerid, 0xDADADAFF, "Solo puedes enviar {ED2B2B}un mensaje {DADADA}cada {ED2B2B}%.2f segundos{DADADA}.", floatdiv(CHAT_MESSAGE_DELAY, 1000));
     }
@@ -40,7 +40,7 @@ alias:decir("d")
 
 command ooc(playerid, const params[], "Envia un mensaje al canal fuera de rol")
 {
-    if(GetTickDiff(GetTickCount(), g_rgiPlayerLastMessageTick[playerid]) > CHAT_MESSAGE_DELAY)
+    if(g_rgiPlayerLastMessageTick[playerid] && GetTickDiff(GetTickCount(), g_rgiPlayerLastMessageTick[playerid]) < CHAT_MESSAGE_DELAY)
     {
         return va_SendClientMessage(playerid, 0xDADADAFF, "Solo puedes enviar {ED2B2B}un mensaje {DADADA}cada {ED2B2B}%.2f segundos{DADADA}.", floatdiv(CHAT_MESSAGE_DELAY, 1000));
     }
@@ -71,7 +71,7 @@ alias:ooc("b")
 
 command gritar(playerid, const params[], "Envia un grito como tu personaje")
 {
-    if(GetTickDiff(GetTickCount(), g_rgiPlayerLastMessageTick[playerid]) > CHAT_MESSAGE_DELAY)
+    if(g_rgiPlayerLastMessageTick[playerid] && GetTickDiff(GetTickCount(), g_rgiPlayerLastMessageTick[playerid]) < CHAT_MESSAGE_DELAY)
     {
         return va_SendClientMessage(playerid, 0xDADADAFF, "Solo puedes enviar {ED2B2B}un mensaje {DADADA}cada {ED2B2B}%.2f segundos{DADADA}.", floatdiv(CHAT_MESSAGE_DELAY, 1000));
     }
@@ -106,7 +106,7 @@ alias:gritar("g")
 
 command me(playerid, const params[], "Ejecuta una acción dentro de rol")
 {
-    if(GetTickDiff(GetTickCount(), g_rgiPlayerLastMessageTick[playerid]) > CHAT_MESSAGE_DELAY)
+    if(g_rgiPlayerLastMessageTick[playerid] && GetTickDiff(GetTickCount(), g_rgiPlayerLastMessageTick[playerid]) < CHAT_MESSAGE_DELAY)
     {
         return va_SendClientMessage(playerid, 0xDADADAFF, "Solo puedes enviar {ED2B2B}un mensaje {DADADA}cada {ED2B2B}%.2f segundos{DADADA}.", floatdiv(CHAT_MESSAGE_DELAY, 1000));
     }
@@ -126,7 +126,7 @@ alias:me("y")
 
 command do(playerid, const params[], "Indica el entorno actual")
 {
-    if(GetTickDiff(GetTickCount(), g_rgiPlayerLastMessageTick[playerid]) > CHAT_MESSAGE_DELAY)
+    if(g_rgiPlayerLastMessageTick[playerid] && GetTickDiff(GetTickCount(), g_rgiPlayerLastMessageTick[playerid]) < CHAT_MESSAGE_DELAY)
     {
         va_SendClientMessage(playerid, 0xDADADAFF, "Solo puedes enviar {ED2B2B}un mensaje {DADADA}cada {ED2B2B}%.2f segundos{DADADA}.", floatdiv(CHAT_MESSAGE_DELAY, 1000));
         return 0;

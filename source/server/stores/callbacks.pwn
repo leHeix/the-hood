@@ -58,7 +58,7 @@ hook OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
                 }
 
                 TextDrawSetStringForPlayer(g_tdShops[5], playerid, Str_FixEncoding(g_rgeShops[shop_id][e_szShopName]));
-                TextDrawSetStringForPlayer(g_tdShops[10], playerid, va_return("$%d", g_rgeShopItems[shop_id][0][e_iItemPrice]));
+                TextDrawSetStringForPlayer(g_tdShops[10], playerid, "$%d", g_rgeShopItems[shop_id][0][e_iItemPrice]);
                 TextDrawSetStringForPlayer(g_tdShops[11], playerid, Str_FixEncoding(g_rgeShopItems[shop_id][0][e_szItemName]));
                 
                 new Float:cam_x, Float:cam_y, Float:cam_z, Float:cvec_x, Float:cvec_y, Float:cvec_z;
@@ -120,7 +120,7 @@ hook OnPlayerClickTextDraw(playerid, Text:clickedid)
                 g_rgiPlayerShopObject[playerid] = CreatePlayerObject(playerid, g_rgeShopItems[shop_id][g_rgiPlayerCurrentItem[playerid]][e_iItemModel], g_rgeShops[shop_id][e_fShopObjectStartX], g_rgeShops[shop_id][e_fShopObjectStartY], g_rgeShops[shop_id][e_fShopObjectStartZ], g_rgeShopItems[shop_id][g_rgiPlayerCurrentItem[playerid]][e_fRotationX], g_rgeShopItems[shop_id][g_rgiPlayerCurrentItem[playerid]][e_fRotationY], g_rgeShopItems[shop_id][g_rgiPlayerCurrentItem[playerid]][e_fRotationZ]);
                 MovePlayerObject(playerid, g_rgiPlayerShopObject[playerid], g_rgeShops[shop_id][e_fShopObjectIdleX], g_rgeShops[shop_id][e_fShopObjectIdleY], g_rgeShops[shop_id][e_fShopObjectIdleZ], 1.2);
 
-                TextDrawSetStringForPlayer(g_tdShops[10], playerid, va_return("$%d", g_rgeShopItems[shop_id][g_rgiPlayerCurrentItem[playerid]][e_iItemPrice]));
+                TextDrawSetStringForPlayer(g_tdShops[10], playerid, "$%d", g_rgeShopItems[shop_id][g_rgiPlayerCurrentItem[playerid]][e_iItemPrice]);
                 TextDrawSetStringForPlayer(g_tdShops[11], playerid, Str_FixEncoding(g_rgeShopItems[shop_id][g_rgiPlayerCurrentItem[playerid]][e_szItemName]));
             }
             cb_MovePlayerObject(using inline MovingDone, playerid, g_rgiPlayerShopObject[playerid], g_rgeShops[shop_id][e_fShopObjectEndX], g_rgeShops[shop_id][e_fShopObjectEndY], g_rgeShops[shop_id][e_fShopObjectEndZ], 1.2);
@@ -146,7 +146,7 @@ hook OnPlayerClickTextDraw(playerid, Text:clickedid)
                 g_rgiPlayerShopObject[playerid] = CreatePlayerObject(playerid, g_rgeShopItems[shop_id][g_rgiPlayerCurrentItem[playerid]][e_iItemModel], g_rgeShops[shop_id][e_fShopObjectStartX], g_rgeShops[shop_id][e_fShopObjectStartY], g_rgeShops[shop_id][e_fShopObjectStartZ], g_rgeShopItems[shop_id][g_rgiPlayerCurrentItem[playerid]][e_fRotationX], g_rgeShopItems[shop_id][g_rgiPlayerCurrentItem[playerid]][e_fRotationY], g_rgeShopItems[shop_id][g_rgiPlayerCurrentItem[playerid]][e_fRotationZ]);
                 MovePlayerObject(playerid, g_rgiPlayerShopObject[playerid], g_rgeShops[shop_id][e_fShopObjectIdleX], g_rgeShops[shop_id][e_fShopObjectIdleY], g_rgeShops[shop_id][e_fShopObjectIdleZ], 1.2);
 
-                TextDrawSetStringForPlayer(g_tdShops[10], playerid, va_return("$%d", g_rgeShopItems[shop_id][g_rgiPlayerCurrentItem[playerid]][e_iItemPrice]));
+                TextDrawSetStringForPlayer(g_tdShops[10], playerid, "$%d", g_rgeShopItems[shop_id][g_rgiPlayerCurrentItem[playerid]][e_iItemPrice]);
                 TextDrawSetStringForPlayer(g_tdShops[11], playerid, Str_FixEncoding(g_rgeShopItems[shop_id][g_rgiPlayerCurrentItem[playerid]][e_szItemName]));
             }
             cb_MovePlayerObject(using inline MovingDone, playerid, g_rgiPlayerShopObject[playerid], g_rgeShops[shop_id][e_fShopObjectEndX], g_rgeShops[shop_id][e_fShopObjectEndY], g_rgeShops[shop_id][e_fShopObjectEndZ], 1.2);

@@ -10,7 +10,7 @@ hook OnPlayerText(playerid, text[])
     if(!Bit_Get(Player_Flags(playerid), PFLAG_IN_GAME))
         return 0;
 
-    if(GetTickDiff(GetTickCount(), g_rgiPlayerLastMessageTick[playerid]) > CHAT_MESSAGE_DELAY)
+    if(g_rgiPlayerLastMessageTick[playerid] && GetTickDiff(GetTickCount(), g_rgiPlayerLastMessageTick[playerid]) < CHAT_MESSAGE_DELAY)
     {
         SendClientMessagef(playerid, 0xDADADAFF, "Solo puedes enviar {ED2B2B}un mensaje {DADADA}cada {ED2B2B}%.2f segundos{DADADA}.", floatdiv(CHAT_MESSAGE_DELAY, 1000));
         return 0;

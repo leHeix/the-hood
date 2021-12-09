@@ -50,6 +50,7 @@ static GunManEvent(playerid, _event_id)
 
             g_rgiPlayerBenchUsed[playerid] = id;
             TogglePlayerDynamicCP(playerid, g_rgiBenchCheckpoint[id], true);
+            Streamer_Update(playerid, STREAMER_TYPE_CP);
             Notification_ShowBeatingText(playerid, 7500, 0xED2B2B, 255, 100, "Dirijete a tu mesa asignada para empezar a trabajar");
         }
         case JOB_EVENT_LEFT:
@@ -113,11 +114,8 @@ hook OnPlayerEnterDynamicCP(playerid, checkpointid)
 
     if(g_rgiPlayerBenchUsed[playerid] != -1)
     {
-        printf("1 (%d)", g_rgiPlayerBenchUsed{playerid});
         if(checkpointid == g_rgiBenchCheckpoint[g_rgiPlayerBenchUsed[playerid]])
         {
-            printf("2 (%d)", g_rgiBenchCheckpoint[g_rgiPlayerBenchUsed[playerid]]);
-
             TogglePlayerDynamicCP(playerid, checkpointid, false);
             TogglePlayerControllable(playerid, false);
 

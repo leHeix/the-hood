@@ -169,6 +169,8 @@ DEFINE_HOOK_REPLACEMENT__(OnPlayer, OP);
 #include "player/needs/header.pwn"
 #include "player/auth/header.pwn"
 #include "player/keygame/header.pwn"
+#include "player/inventory/header.pwn"
+#include "player/cellphone/header.pwn"
 
 // Functions
 ///////////////
@@ -188,6 +190,8 @@ DEFINE_HOOK_REPLACEMENT__(OnPlayer, OP);
 #include "player/needs/functions.pwn"
 #include "player/auth/functions.pwn"
 #include "player/keygame/functions.pwn"
+#include "player/inventory/functions.pwn"
+#include "player/cellphone/functions.pwn"
 
 // Callbacks
 ///////////////
@@ -201,6 +205,7 @@ DEFINE_HOOK_REPLACEMENT__(OnPlayer, OP);
 #include "server/enter_exits/callbacks.pwn"
 #include "server/stores/callbacks.pwn"
 #include "server/stores/pizza/callbacks.pwn"
+#include "server/stores/convenience/callbacks.pwn"
 #include "server/chat/callbacks.pwn"
 #include "server/vehicles/callbacks.pwn"
 #include "server/chatbuffer/callbacks.pwn"
