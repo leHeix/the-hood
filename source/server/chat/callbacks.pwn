@@ -10,7 +10,7 @@ hook OnPlayerText(playerid, text[])
     if(!Bit_Get(Player_Flags(playerid), PFLAG_IN_GAME))
         return 0;
 
-    if(g_rgiPlayerLastMessageTick[playerid] > GetTickCount())
+    if(GetTickDiff(GetTickCount(), g_rgiPlayerLastMessageTick[playerid]) > CHAT_MESSAGE_DELAY)
     {
         SendClientMessagef(playerid, 0xDADADAFF, "Solo puedes enviar {ED2B2B}un mensaje {DADADA}cada {ED2B2B}%.2f segundos{DADADA}.", floatdiv(CHAT_MESSAGE_DELAY, 1000));
         return 0;
@@ -35,7 +35,7 @@ hook OnPlayerText(playerid, text[])
 
     SetPlayerChatBubble(playerid, short, -1, 5.0, 5000);
 
-    g_rgiPlayerLastMessageTick[playerid] = GetTickCount() + CHAT_MESSAGE_DELAY;
+    g_rgiPlayerLastMessageTick[playerid] = GetTickCount();
 
     return 0;
 }

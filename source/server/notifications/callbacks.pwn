@@ -102,8 +102,8 @@ public NOTIFICATION_ProcessText(playerid, time, alpha_min, alpha_max, bool:shoul
     // true = in
     static bool:td_phase[MAX_PLAYERS char];
 
-    new colour = PlayerTextDrawGetColor(playerid, p_tdBeatingText{playerid});
-    new current_alpha = (colour & 0xFF);
+    new color = PlayerTextDrawGetColor(playerid, p_tdBeatingText{playerid});
+    new current_alpha = (color & 0xFF);
 
     if (!should_hide)
     {
@@ -139,9 +139,9 @@ public NOTIFICATION_ProcessText(playerid, time, alpha_min, alpha_max, bool:shoul
         current_alpha -= NOTIFICATION_TEXT_BEAT_DIFF;
     }
 
-    colour = RGBA_SetAlpha(colour, clamp(current_alpha, 0, 255));
+    color = RGBA_SetAlpha(color, clamp(current_alpha, 0, 255));
 
-    PlayerTextDrawColor(playerid, p_tdBeatingText{playerid}, colour);
+    PlayerTextDrawColor(playerid, p_tdBeatingText{playerid}, color);
     PlayerTextDrawBackgroundColor(playerid, p_tdBeatingText{playerid}, current_alpha);
     PlayerTextDrawShow(playerid, p_tdBeatingText{playerid});
 

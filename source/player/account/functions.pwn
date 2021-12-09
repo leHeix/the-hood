@@ -106,7 +106,7 @@ Player_GiveMoney(playerid, money, bool:update = false)
     Player_Money(playerid) += money;
 
 	ResetPlayerMoney(playerid);
-	GivePlayerMoney(playerid, money);
+	GivePlayerMoney(playerid, Player_Money(playerid));
 
 	if(update)
 	{

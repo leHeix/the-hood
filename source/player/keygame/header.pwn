@@ -14,7 +14,7 @@ const Float:KEYGAME_BAR_MIN_Y = 16.0;
 
 new const g_rgiRandomKeys[] = {
     KEY_YES, KEY_NO, KEY_CTRL_BACK, KEY_CROUCH,
-    KEY_UP, KEY_DOWN, KEY_LEFT, KEY_RIGHT
+    KEY_UP
 };
 
 new const g_rgszKeyNames[][] = {
@@ -22,10 +22,7 @@ new const g_rgszKeyNames[][] = {
     "~k~~CONVERSATION_NO~", 
     "~k~~GROUP_CONTROL_BWD~",
     "~k~~PED_DUCK~",
-    "~k~~GO_FORWARD~",
-    "~k~~GO_BACK~",
-    "~k~~GO_LEFT~",
-    "~k~~GO_RIGHT~"
+    "~k~~GO_FORWARD~"
 };
 
 enum eKeyGameData

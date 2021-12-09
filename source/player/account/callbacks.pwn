@@ -128,6 +128,7 @@ hook OPPauseStateChange(playerid, pausestate)
 
 hook OnPlayerSpawn(playerid)
 {
+    TogglePlayerAllDynamicCPs(playerid, false);
     ApplyAnimation(playerid, "PED", "null", 4.1, false, false, false, false, 0, 0);
     ApplyAnimation(playerid, "SMOKING", "null", 4.1, false, false, false, false, 0, 0);
     ApplyAnimation(playerid, "CRIB", "null", 4.1, false, false, false, false, 0, 0);

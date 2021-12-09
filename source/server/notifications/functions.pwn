@@ -84,7 +84,7 @@ _Notification_HideAll(playerid, index)
 	PlayerTextDrawHide(playerid, p_tdNotifications[playerid][index]{4});
 }
 
-Notification_ShowBeatingText(playerid, time, colour, alpha_max, alpha_min, const text[])
+Notification_ShowBeatingText(playerid, time, color, alpha_max, alpha_min, const text[])
 {
     if(g_rgiTextProcessTimer[playerid])
     {
@@ -100,8 +100,8 @@ Notification_ShowBeatingText(playerid, time, colour, alpha_max, alpha_min, const
             string[i] = '_';
     }
 
-    new td_colour = (colour << 8) ^ alpha_max;
-    PlayerTextDrawColor(playerid, p_tdBeatingText{playerid}, td_colour);
+    new td_color = (color << 8) ^ alpha_max;
+    PlayerTextDrawColor(playerid, p_tdBeatingText{playerid}, td_color);
     PlayerTextDrawBackgroundColor(playerid, p_tdBeatingText{playerid}, alpha_max);
     PlayerTextDrawSetString(playerid, p_tdBeatingText{playerid}, string);
     PlayerTextDrawShow(playerid, p_tdBeatingText{playerid});

@@ -9,13 +9,13 @@ forward OnPlayerPressEsc(playerid);
 
 static 
     s_rgiCancelTick[MAX_PLAYERS],
-    s_rgiSelectColour[MAX_PLAYERS];
+    s_rgiSelectColor[MAX_PLAYERS];
 
 native PrintBacktrace();
 
 hook native SelectTextDraw(playerid, hovercolor)
 {
-    s_rgiSelectColour[playerid] = hovercolor;
+    s_rgiSelectColor[playerid] = hovercolor;
     return continue(playerid, hovercolor);
 }
 
@@ -41,7 +41,7 @@ hook OnPlayerClickTextDraw(playerid, Text:clickedid)
     return 1;
 }
 
-stock Player_GetSelectionColour(playerid)
+stock Player_GetSelectionColor(playerid)
 {
-    return s_rgiSelectColour[playerid];
+    return s_rgiSelectColor[playerid];
 }

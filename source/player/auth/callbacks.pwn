@@ -71,7 +71,7 @@ hook OnPlayerPressEsc(playerid)
 {
 	if(Bit_Get(Player_Flags(playerid), PFLAG_AUTHENTICATING) && IsTextDrawVisibleForPlayer(playerid, g_tdRegisterAcc[0]))
 	{
-		TextDraw_DelayedSelect(playerid, Player_GetSelectionColour(playerid));
+		TextDraw_DelayedSelect(playerid, Player_GetSelectionColor(playerid));
 		return ~1;
 	}
 	else if(Bit_Get(Player_Flags(playerid), PFLAG_CUSTOMIZING_PLAYER) && IsTextDrawVisibleForPlayer(playerid, g_tdPlayerCustomization[0]))
@@ -327,8 +327,6 @@ hook OnPlayerClickTextDraw(playerid, Text:clickedid)
 
 				inline const ScreenBlacked()
 				{
-					Transition_Pause(playerid);
-
 					Auth_ToggleTextdraws(playerid, false);
 
 					new Float:x, Float:y, Float:z, Float:angle;
@@ -344,8 +342,6 @@ hook OnPlayerClickTextDraw(playerid, Text:clickedid)
 					GivePlayerMoney(playerid, Player_Money(playerid));
 
 					SetCameraBehindPlayer(playerid);
-					
-					Transition_Resume(playerid);
 
 					Iter_Add(LoggedIn, playerid);
 

@@ -7,8 +7,8 @@ Transition_StartInline(Func:cb<>, playerid, count, bool:in)
 {
     Indirect_Claim(cb);
 
-    new colour = (in ? 0 : 0xFF);
-    PlayerTextDrawBoxColor(playerid, p_tdTransition{playerid}, colour);
+    new color = (in ? 0 : 0xFF);
+    PlayerTextDrawBoxColor(playerid, p_tdTransition{playerid}, color);
     PlayerTextDrawShow(playerid, p_tdTransition{playerid});
 
     g_rgeTransitionData[playerid][e_pCallback] = cb;

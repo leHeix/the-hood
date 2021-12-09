@@ -28,7 +28,7 @@ enum ePlayerData {
 	e_iPlayerIp,
 	e_szPlayerLastConnection[20],
 	Float:e_fPlayerHealth,
-	Float:e_fPlayerArmour,
+	Float:e_fPlayerArmor,
 	e_iPlayerMoney,
 	Float:e_fSpawnPosX,
 	Float:e_fSpawnPosY,
@@ -86,8 +86,8 @@ new
 #define Player_GetIpString(%0) (RawIpToString(g_rgePlayerData[(%0)][e_iPlayerIp]))
 #define Player_GetLastConnection(%0) (g_rgePlayerData[(%0)][e_szPlayerLastConnection])
 #define Player_Health(%0) (g_rgePlayerData[(%0)][e_fPlayerHealth])
-#define Player_Armour(%0) (g_rgePlayerData[(%0)][e_fPlayerArmour])
-#define Player_Armor Player_Armour
+#define Player_Armor(%0) (g_rgePlayerData[(%0)][e_fPlayerArmor])
+#define Player_Armour Player_Armor
 #define Player_Money(%0) (g_rgePlayerData[(%0)][e_iPlayerMoney])
 #define Player_VirtualWorld(%0) (g_rgePlayerData[(%0)][e_iPlayerVirtualWorld])
 #define Player_Interior(%0) (g_rgePlayerData[(%0)][e_iPlayerInterior])

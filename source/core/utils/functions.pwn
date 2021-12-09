@@ -289,6 +289,15 @@ stock binary_search(const arr[], value, low = 0, high = sizeof(arr))
 Float:lerp(Float:p1, Float:p2, Float:t)
 	return p1 + (p2 - p1) * t;
 
+stock GetTickDiff(newtick, oldtick)
+{
+	if (oldtick > newtick) 
+    {
+		return (cellmax - oldtick + 1) - (cellmin - newtick);
+	}
+	return newtick - oldtick;
+}
+
 /*
 Float:fclamp(Float:v, Float:min, Float:max)
 {

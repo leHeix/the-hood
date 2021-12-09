@@ -1,3 +1,54 @@
+/*
+
+
+.......................................................................
+.   o   \ o /  _ o        __|    \ /     |__         o _  \ o /   o   .
+.  /|\    |     /\   __\o   \o    |    o/     o/__   /\     |    /|\  .
+.  / \   / \   | \  /) |    ( \  /o\  / )    |   (\  / |   / \   / \  .
+.       .......................................................       .
+. \ o / .                                                     . \ o / .
+.   |   .                                                     .   |   .
+.  / \  .     **********THE BEST RAKSAMP EVER************     .  / \  .
+.       .                                                     .       .
+.  _ o  .     		   __    _____ _____ _____                .  _ o  .
+.   /\  .     		  |  |  |     |  _  |     |               .   /\  .
+.  | \  .     		  |  |__| | | |     |  |  |               .  | \  .
+.       .     		  |_____|_|_|_|__|__|_____|               .       .
+.       .      _____ __ __ _____ _____ _____ _____ _____      .       .
+.  __\o .     |   __|  |  |_   _| __  |   __|     |   __|     .  __\o .
+. /) |  .     |   __|-   -| | | |    -|   __| | | |   __|     . /) |  .
+.       .     |_____|__|__| |_| |__|__|_____|_|_|_|_____|     .       .
+. __|   .                                                     . __|   .
+.   \o  .     >>>>>>>>>>>>>>>-- CREDITS --<<<<<<<<<<<<<<<     .    \o .
+.   ( \ .                                                     .   ( \ .
+.       .      .P3TI.     .TYT.      .FYP.        .OPCODE.    .       .
+.  \ /  .               .HANDZ.       .BRAINZ.                .  \ /  .
+.   |   .                                                     .   |   .
+.  /o\  .     .-.            .-.                              .  /o\  .
+.       .   .-| |-.        .-| |-.          _---~~(~~-_.      .       .
+.   |__ .   | | | |  THX   | | | |        _{  KK    )   )     .   |__ .
+. o/    . .-| | | |        | | | |-.    ,   ) -~~- ( ,-' )_   . o/    .
+./ )    . | | | | |        | | | | |   (  `-,_..`., )-- '_,)  ./ )    .
+.       . | | | | |-.    .-| | |*| |  (_-  _  ~_-~~~~`,  ,' ) .       .
+.       . | '     | |    | |     ` |    `~ -^(    __;-,((())) .       .
+. o/__  . |       | |    | |       |          ~~~~ {_ -_(())  . o/__  .
+.  | (\ . |         |    |         |     THX        `\  }     . |  (\ .
+.       . \         /    \         /                 `\  }    .       .
+.  o _  .  |       |     |       |                            .  o _  .
+.  /\   .  |       |     |       |                            .  /\   .
+.  / |  .      +----------------------------------+           .  / |  .
+.       .      |     MANY THANKS TO OUR HANDS     |           .       .
+. \ o / .      | AND BRAINS TO MAKE THIS POSSIBLE |           . \ o / .
+.   |   .      +----------------------------------+           .   |   .
+.  / \  .                                                     .  / \  .
+.       .......................................................       .
+.   o   \ o /  _ o        __|    \ /     |__         o _  \ o /   o   .
+.  /|\    |     /\   __\o   \o    |    o/     o/__   /\     |    /|\  .
+.  / \   / \   | \  /) |    ( \  /o\  / )    |   (\  / |   / \   / \  .
+.......................................................................
+
+*/
+
 #pragma option -;+
 #pragma option -(+
 #pragma semicolon 1
@@ -73,7 +124,9 @@ L1:
 #include <YSI_Coding\y_inline>
 #include <YSI_Coding\y_stringhash>
 #include <YSI_Coding\y_va>
+#include <YSI_Core\y_cell>
 #include <YSI_Core\y_compilerdata>
+//#include <YSI_Core\y_profiling>
 #include <YSI_Core\y_utils>
 #include <YSI_Data\y_bit>
 #include <YSI_Data\y_iterate>
@@ -93,7 +146,7 @@ DEFINE_HOOK_REPLACEMENT__(OnPlayer, OP);
 #include "core/fixes/textdraws.pwn"
 #include "core/utils/bcrypt_inline.pwn"
 #include "core/utils/objects_inline.pwn"
-#include "core/utils/colour.pwn"
+#include "core/utils/color.pwn"
 
 // Headers
 /////////////
@@ -110,6 +163,8 @@ DEFINE_HOOK_REPLACEMENT__(OnPlayer, OP);
 #include "server/chat/header.pwn"
 #include "server/vehicles/header.pwn"
 #include "server/chatbuffer/header.pwn"
+#include "server/jobs/header.pwn"
+#include "server/jobs/gunman/header.pwn"
 #include "player/account/header.pwn"
 #include "player/needs/header.pwn"
 #include "player/auth/header.pwn"
@@ -128,6 +183,7 @@ DEFINE_HOOK_REPLACEMENT__(OnPlayer, OP);
 #include "server/chat/functions.pwn"
 #include "server/vehicles/functions.pwn"
 #include "server/chatbuffer/functions.pwn"
+#include "server/jobs/functions.pwn"
 #include "player/account/functions.pwn"
 #include "player/needs/functions.pwn"
 #include "player/auth/functions.pwn"
@@ -152,6 +208,7 @@ DEFINE_HOOK_REPLACEMENT__(OnPlayer, OP);
 #include "player/needs/callbacks.pwn"
 #include "player/auth/callbacks.pwn"
 #include "player/keygame/callbacks.pwn"
+#include "server/jobs/callbacks.pwn"
 #include "server/jobs/gunman/callbacks.pwn"
 
 // Commands

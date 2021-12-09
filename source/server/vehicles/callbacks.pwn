@@ -167,19 +167,63 @@ public VEHICLE_Update(vehicleid)
 
 hook OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
 {
-    if(IsPlayerInAnyVehicle(playerid) && (newkeys & KEY_NO) != 0)
+    if(GetPlayerState(playerid) == PLAYER_STATE_DRIVER)
     {
         new vehicleid = GetPlayerVehicleID(playerid);
-        if(g_rgeVehicles[vehicleid][e_iVehicleTimers][VEHICLE_TIMER_TOGGLE_ENGINE])
-        {
-            Notification_ShowBeatingText(playerid, 1000, 0xED2B2B, 255, 100, va_return("El vehículo ya se está %s", (Vehicle_GetEngineState(vehicleid) ? "apagando" : "encendiendo")));
-            return 1;
-        }
 
-        Notification_ShowBeatingText(playerid, 1000, 0xF29624, 255, 100, va_return("%s motor", (Vehicle_GetEngineState(vehicleid) == VEHICLE_STATE_ON ? "Apagando" : "Encendiendo")));
-        g_rgeVehicles[vehicleid][e_iVehicleTimers][VEHICLE_TIMER_TOGGLE_ENGINE] = SetTimerEx("VEHICLE_ToggleEngineTimer", 1000, false, "ii", playerid, vehicleid);
+        if((newkeys & KEY_NO) != 0)
+        {
+            if(g_rgeVehicles[vehicleid][e_iVehicleTimers][VEHICLE_TIMER_TOGGLE_ENGINE])
+            {
+                Notification_ShowBeatingText(playerid, 1000, 0xED2B2B, 255, 100, va_return("El vehículo ya se está %s", (Vehicle_GetEngineState(vehicleid) ? "apagando" : "encendiendo")));
+                return 1;
+            }
+
+            Notification_ShowBeatingText(playerid, 1000, 0xF29624, 255, 100, va_return("%s motor", (Vehicle_GetEngineState(vehicleid) == VEHICLE_STATE_ON ? "Apagando" : "Encendiendo")));
+            g_rgeVehicles[vehicleid][e_iVehicleTimers][VEHICLE_TIMER_TOGGLE_ENGINE] = SetTimerEx("VEHICLE_ToggleEngineTimer", 1000, false, "ii", playerid, vehicleid);
+        }
+        else if((newkeys & KEY_LOOK_LEFT) != 0)
+        {
+            new speedometer_gearbox[15] = "////";
+
+            --g_rgeVehicles[vehicleid][e_iVehicleGear];
+            if(g_rgeVehicles[vehicleid][e_iVehicleGear] < -1)
+                g_rgeVehicles[vehicleid][e_iVehicleGear] = -1;
+
+            switch(g_rgeVehicles[vehicleid][e_iVehicleGear])
+            {
+                case -1: strins(speedometer_gearbox, "~r~~h~", 0);
+                case 1 .. 4:
+                {
+                    strins(speedometer_gearbox, "~r~", g_rgeVehicles[vehicleid][e_iVehicleGear]);
+                    strins(speedometer_gearbox, "~g~", 0);
+                }
+            }
+
+            TextDrawSetStringForPlayer(g_tdSpeedometer[2], playerid, speedometer_gearbox);
+        }
+        else if((newkeys & KEY_LOOK_RIGHT) != 0)
+        {
+            new speedometer_gearbox[15] = "////";
+
+            ++g_rgeVehicles[vehicleid][e_iVehicleGear];
+            if(g_rgeVehicles[vehicleid][e_iVehicleGear] > 4)
+                g_rgeVehicles[vehicleid][e_iVehicleGear] = 4;
+
+            switch(g_rgeVehicles[vehicleid][e_iVehicleGear])
+            {
+                case -1: strins(speedometer_gearbox, "~r~~h~", 0);
+                case 1 .. 4:
+                {
+                    strins(speedometer_gearbox, "~r~", g_rgeVehicles[vehicleid][e_iVehicleGear]);
+                    strins(speedometer_gearbox, "~g~", 0);
+                }
+            }
+
+            TextDrawSetStringForPlayer(g_tdSpeedometer[2], playerid, speedometer_gearbox);
+        }
     }
-    else if((newkeys & KEY_YES) != 0)
+    else if((newkeys & KEY_YES) != 0 && !IsPlayerInAnyVehicle(playerid))
     {
         if(IsPlayerInDynamicArea(playerid, g_rgiAutoDealershipArea))
         {
@@ -332,6 +376,48 @@ public VEHICLE_ToggleEngineTimer(playerid, vehicleid)
 
     Vehicle_ToggleEngine(vehicleid);
     Notification_ShowBeatingText(playerid, 3000, 0x98D952, 255, 100, va_return("Motor %s", (Vehicle_GetEngineState(vehicleid) ? "encendido" : "apagado")));
+
+    return 1;
+}
+
+hook OnPlayerUpdate(playerid)
+{
+    if(IsPlayerInAnyVehicle(playerid))
+    {
+        new vehicleid = GetPlayerVehicleID(playerid);
+
+        new Float:x, Float:y, Float:z, Float:direction;
+        GetVehicleVelocity(vehicleid, x, y, z);
+        GetVehicleVelocityDirection(vehicleid, direction);
+
+        /*
+        new E_TDW_VEHICLE_SA_TYPE:vehicle_type = GetModelStaticType(GetVehicleModel(vehicleid));
+
+        if((vehicle_type != BIKE && vehicle_type != MOTORBIKE) && g_rgeVehicles[vehicleid][e_iVehicleGear] != -1 && y < 0.0)
+        {
+            SetVehicleVelocity(vehicleid, 0.0, 0.0, z);
+            return 1;
+        }
+        */
+
+        if(g_rgeVehicles[vehicleid][e_iVehicleGear] == 0)
+        {
+            if(floatabs(x) + floatabs(y) > 0.0)
+                SetVehicleVelocity(vehicleid, 0.0, 0.0, z);
+            
+            return 1;
+        }
+
+        new veh_max_speed = GetModelStaticSpeed(GetVehicleModel(vehicleid));
+        new Float:veh_speed_per_gear = (veh_max_speed / 4.0);
+        new Float:veh_speed = GetVehicleSpeedFromVelocity(x, y, z, EI_MATH_SPEED_KMPH);
+        new Float:current_gear_speed = veh_speed_per_gear * g_rgeVehicles[vehicleid][e_iVehicleGear];
+
+        if(veh_speed > current_gear_speed)
+        {
+            SetVehicleSpeed(vehicleid, current_gear_speed);
+        }
+    }
 
     return 1;
 }

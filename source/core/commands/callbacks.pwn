@@ -44,12 +44,12 @@ public OnPlayerCommandReceived(playerid, cmd[], params[], flags)
 	new cmd_level = (flags >>> 24);
 
 	if(cmd_level != Player_Rank(playerid))
-		return -1;
+		return 0;
 
-	if(!(flags & CMD_NO_COOLDOWN) && g_rgiPlayerCommandCooldown[playerid] + 500 > GetTickCount())
+	if(!(flags & CMD_NO_COOLDOWN) && GetTickDiff(GetTickCount(), g_rgiPlayerCommandCooldown[playerid]) > 500)
 	{
 		SendClientMessage(playerid, 0xDADADAFF, "Solo puedes enviar {ED2B2B}dos comando por segundo{DADADA}. Algunos comandos no disponen de tiempo de espera.");
-		return -1;
+		return 0;
 	}
 
 	g_rgiPlayerCommandCooldown[playerid] = GetTickCount();

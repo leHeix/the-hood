@@ -5,7 +5,7 @@
 
 command decir(playerid, const params[], "Envia un mensaje como tu personaje")
 {
-    if(g_rgiPlayerLastMessageTick[playerid] > GetTickCount())
+    if(GetTickDiff(GetTickCount(), g_rgiPlayerLastMessageTick[playerid]) > CHAT_MESSAGE_DELAY)
     {
         return va_SendClientMessage(playerid, 0xDADADAFF, "Solo puedes enviar {ED2B2B}un mensaje {DADADA}cada {ED2B2B}%.2f segundos{DADADA}.", floatdiv(CHAT_MESSAGE_DELAY, 1000));
     }
@@ -32,7 +32,7 @@ command decir(playerid, const params[], "Envia un mensaje como tu personaje")
 
     SetPlayerChatBubble(playerid, short, -1, 5.0, 5000);
 
-    g_rgiPlayerLastMessageTick[playerid] = GetTickCount() + CHAT_MESSAGE_DELAY;
+    g_rgiPlayerLastMessageTick[playerid] = GetTickCount();
 
     return 1;
 }
@@ -40,7 +40,7 @@ alias:decir("d")
 
 command ooc(playerid, const params[], "Envia un mensaje al canal fuera de rol")
 {
-    if(g_rgiPlayerLastMessageTick[playerid] > GetTickCount())
+    if(GetTickDiff(GetTickCount(), g_rgiPlayerLastMessageTick[playerid]) > CHAT_MESSAGE_DELAY)
     {
         return va_SendClientMessage(playerid, 0xDADADAFF, "Solo puedes enviar {ED2B2B}un mensaje {DADADA}cada {ED2B2B}%.2f segundos{DADADA}.", floatdiv(CHAT_MESSAGE_DELAY, 1000));
     }
@@ -63,7 +63,7 @@ command ooc(playerid, const params[], "Envia un mensaje al canal fuera de rol")
 
     SetPlayerChatBubble(playerid, short, 0xABABABFF, 5.0, 5000);
 
-    g_rgiPlayerLastMessageTick[playerid] = GetTickCount() + CHAT_MESSAGE_DELAY;
+    g_rgiPlayerLastMessageTick[playerid] = GetTickCount();
 
     return 1;
 }
@@ -71,7 +71,7 @@ alias:ooc("b")
 
 command gritar(playerid, const params[], "Envia un grito como tu personaje")
 {
-    if(g_rgiPlayerLastMessageTick[playerid] > GetTickCount())
+    if(GetTickDiff(GetTickCount(), g_rgiPlayerLastMessageTick[playerid]) > CHAT_MESSAGE_DELAY)
     {
         return va_SendClientMessage(playerid, 0xDADADAFF, "Solo puedes enviar {ED2B2B}un mensaje {DADADA}cada {ED2B2B}%.2f segundos{DADADA}.", floatdiv(CHAT_MESSAGE_DELAY, 1000));
     }
@@ -98,7 +98,7 @@ command gritar(playerid, const params[], "Envia un grito como tu personaje")
 
     SetPlayerChatBubble(playerid, short, -1, 10.0, 5000);
 
-    g_rgiPlayerLastMessageTick[playerid] = GetTickCount() + CHAT_MESSAGE_DELAY;
+    g_rgiPlayerLastMessageTick[playerid] = GetTickCount();
 
     return 1;
 }
@@ -106,7 +106,7 @@ alias:gritar("g")
 
 command me(playerid, const params[], "Ejecuta una acción dentro de rol")
 {
-    if(g_rgiPlayerLastMessageTick[playerid] > GetTickCount())
+    if(GetTickDiff(GetTickCount(), g_rgiPlayerLastMessageTick[playerid]) > CHAT_MESSAGE_DELAY)
     {
         return va_SendClientMessage(playerid, 0xDADADAFF, "Solo puedes enviar {ED2B2B}un mensaje {DADADA}cada {ED2B2B}%.2f segundos{DADADA}.", floatdiv(CHAT_MESSAGE_DELAY, 1000));
     }
@@ -118,7 +118,7 @@ command me(playerid, const params[], "Ejecuta una acción dentro de rol")
     format(action, sizeof(action), "%s %s", Player_RPName(playerid), action);
     Player_SendLocalMessage(playerid, 0xC157EBFF, 15.0, action);
 
-    g_rgiPlayerLastMessageTick[playerid] = GetTickCount() + CHAT_MESSAGE_DELAY;
+    g_rgiPlayerLastMessageTick[playerid] = GetTickCount();
 
     return 1;
 }
@@ -126,7 +126,7 @@ alias:me("y")
 
 command do(playerid, const params[], "Indica el entorno actual")
 {
-    if(g_rgiPlayerLastMessageTick[playerid] > GetTickCount())
+    if(GetTickDiff(GetTickCount(), g_rgiPlayerLastMessageTick[playerid]) > CHAT_MESSAGE_DELAY)
     {
         va_SendClientMessage(playerid, 0xDADADAFF, "Solo puedes enviar {ED2B2B}un mensaje {DADADA}cada {ED2B2B}%.2f segundos{DADADA}.", floatdiv(CHAT_MESSAGE_DELAY, 1000));
         return 0;
@@ -139,7 +139,7 @@ command do(playerid, const params[], "Indica el entorno actual")
     format(env, sizeof(env), "%s (( %s ))", env, Player_RPName(playerid));
     Player_SendLocalMessage(playerid, 0x46C759FF, 15.0, env);
 
-    g_rgiPlayerLastMessageTick[playerid] = GetTickCount() + CHAT_MESSAGE_DELAY;
+    g_rgiPlayerLastMessageTick[playerid] = GetTickCount();
 
     return 1;
 }
