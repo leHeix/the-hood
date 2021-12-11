@@ -21,7 +21,7 @@ hook native SelectTextDraw(playerid, hovercolor)
 
 hook native CancelSelectTextDraw(playerid)
 {
-    s_rgiCancelTick[playerid] = GetTickCount() + (50 + GetPlayerPing(playerid));
+    s_rgiCancelTick[playerid] = GetTickCount();
     return continue(playerid);
 }
 
@@ -29,7 +29,7 @@ hook OnPlayerClickTextDraw(playerid, Text:clickedid)
 {
     if(clickedid == INVALID_TEXT_DRAW)
     {
-        if(s_rgiCancelTick[playerid] < GetTickCount())
+        if(!s_rgiCancelTick[playerid] || GetTickDiff(GetTickCount(), s_rgiCancelTick[playerid]) < 50 + GetPlayerPing(playerid))
         {
             CallLocalFunction(!"OnPlayerPressEsc", !"i", playerid);
         }

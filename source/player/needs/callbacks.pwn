@@ -42,3 +42,16 @@ public NEEDS_UpdateHunger(playerid)
 
     return 1;
 }
+
+hook OnPlayerKeyStateChange(playerid, newkeys, oldkeys)
+{
+    if((newkeys & KEY_CTRL_BACK) != 0)
+    {
+        if(IsPlayerInAnyVehicle(playerid))
+            return 1;
+    
+        Player_DrinkFromHand(playerid);
+    }
+
+    return 1;
+}

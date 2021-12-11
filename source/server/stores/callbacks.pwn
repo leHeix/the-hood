@@ -138,7 +138,7 @@ hook OnPlayerClickTextDraw(playerid, Text:clickedid)
             ++g_rgiPlayerCurrentItem[playerid];
 
             inline const MovingDone()
-            {
+            {                
                 Bit_Set(Player_Flags(playerid), PFLAG_CAN_USE_SHOP_BUTTONS, true);
 
                 PlayerPlaySound(playerid, 1145, 0.0, 0.0, 0.0);                
@@ -179,6 +179,11 @@ hook OnPlayerClickTextDraw(playerid, Text:clickedid)
             stor.s.pri ret
         }
 
+        if(ret)
+        {
+            Player_GiveMoney(playerid, -g_rgeShopItems[shop_id][g_rgiPlayerCurrentItem[playerid]][e_iItemPrice], true);
+        }
+        
         PlayerPlaySound(playerid, (ret ? 1054 : 1055), 0.0, 0.0, 0.0);
     }
 

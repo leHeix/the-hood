@@ -86,9 +86,10 @@ hook OnPlayerConnect(playerid)
 	Bit_Set(Player_Flags(playerid), PFLAG_AUTHENTICATING, true);
     
 	mysql_format(g_hDatabase, YSI_UNSAFE_HUGE_STRING, YSI_UNSAFE_HUGE_LENGTH, "\
-        SELECT `PLAYERS`.*, `CONNECTION_LOGS`.`DATE` AS `LAST_CONNECTION` \
-        FROM `PLAYERS`, `CONNECTION_LOGS` \
+        SELECT `PLAYERS`.*, `PLAYER_WEAPONS`.*, `CONNECTION_LOGS`.`DATE` AS `LAST_CONNECTION` \
+        FROM `PLAYERS`, `PLAYER_WEAPONS`, `CONNECTION_LOGS` \
         WHERE `PLAYERS`.`NAME` = '%e'  \
+            AND `PLAYER_WEAPONS`.`ACCOUNT_ID` = `PLAYERS`.`ID` \
             AND `CONNECTION_LOGS`.`ACCOUNT_ID` = `PLAYERS`.`ID` \
         ORDER BY `CONNECTION_LOGS`.`DATE` DESC \
         LIMIT 1;\
@@ -133,5 +134,6 @@ hook OnPlayerSpawn(playerid)
     ApplyAnimation(playerid, "SMOKING", "null", 4.1, false, false, false, false, 0, 0);
     ApplyAnimation(playerid, "CRIB", "null", 4.1, false, false, false, false, 0, 0);
     ApplyAnimation(playerid, "FOOD", "null", 4.1, false, false, false, false, 0, 0);
+    ApplyAnimation(playerid, "BAR", "null", 4.1, false, false, false, false, 0, 0);
     return 1;
 }

@@ -340,6 +340,7 @@ hook OnPlayerClickTextDraw(playerid, Text:clickedid)
 					SetPlayerHealth(playerid, Player_Health(playerid));
 					SetPlayerArmour(playerid, Player_Armour(playerid));
 					GivePlayerMoney(playerid, Player_Money(playerid));
+                    Player_GiveAllWeapons(playerid);
 
 					SetCameraBehindPlayer(playerid);
 

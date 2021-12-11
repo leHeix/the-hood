@@ -84,3 +84,84 @@ Needs_UpdateTextDraws(playerid, bool:show = false)
 
     return 1;
 }
+
+Player_Vomit(playerid)
+{
+    Bit_Set(Player_Flags(playerid), PFLAG_IS_PUKING, true);
+
+    new Float:x, Float:y, Float:z;
+    GetPlayerPos(playerid, x, y, z);
+    SetPlayerFacingAngle(playerid, 0.0);
+    ApplyAnimation(playerid, "FOOD", "EAT_VOMIT_P", 4.0, false, false, false, true, 0);
+    PlayerPlaySound(playerid, 1, 0.0, 0.0, 0.0);
+    PlayerPlaySound(playerid, 1169, 0.0, 0.0, 0.0);
+
+    inline const StartPuking()
+    {
+        new puke_obj = CreateObject(18722, x + 0.355, y - 0.116, z - 1.6, 0.0, 0.0, 0.0);
+
+        inline const AnimDone()
+        {
+            Bit_Set(Player_Flags(playerid), PFLAG_IS_PUKING, false);
+            DestroyObject(puke_obj);
+            ClearAnimations(playerid);
+            PlayerPlaySound(playerid, 0, 0.0, 0.0, 0.0);
+        }
+        PlayerTimer_Start(playerid, 3500, false, using inline AnimDone);
+    }
+    PlayerTimer_Start(playerid, 4000, false, using inline StartPuking);
+}
+
+Player_SetHunger(playerid, Float:hunger)
+{
+    Player_Hunger(playerid) = fclamp(hunger, 0.0, 100.0);
+    return 1;
+}
+
+Player_SetThirst(playerid, Float:thirst)
+{
+    Player_Thirst(playerid) = fclamp(thirst, 0.0, 100.0);
+    return 1;
+}
+
+Player_DrinkFromHand(playerid)
+{
+    if(!Bit_Get(Player_Flags(playerid), PFLAG_HAS_DRINK_ON_HANDS))
+        return 0;
+
+    if(GetPlayerAnimationIndex(playerid) == 16) /* Check if player is already drinking (16 = BAR:DNK_STNDM_LOOP) */
+        return 0;
+
+    new maxclicks = Player_Data(playerid, e_iPlayerDrinkClickedRemaining) & 0xFF;
+    new clicked = Player_Data(playerid, e_iPlayerDrinkClickedRemaining) >> 8;
+
+    if(++clicked >= maxclicks)
+    {
+        new model, Float:x, Float:y, Float:z, Float:rx, Float:ry, Float:rz, Float:sx, Float:sy, Float:sz, c1, c2;
+        GetPlayerAttachedObject(playerid, 0, model, .fX = x, .fY = y, .fZ = z, .fRotX = rx, .fRotY = ry, .fRotZ = rz, .fSacleX = sx, .fScaleY = sy, .fScaleZ = sz, .materialcolor1 = c1, .materialcolor2 = c2);
+        SetPlayerAttachedObject(playerid, 0, model, 5, x, y, z, rx, ry, rz, sx, sy, sz, c1, c2);
+
+        ApplyAnimation(playerid, "VENDING", "VEND_DRINK_P", 4.1, false, false, false, false, 0, false);
+        Bit_Set(Player_Flags(playerid), PFLAG_HAS_DRINK_ON_HANDS, false);
+        Player_Data(playerid, e_iPlayerDrinkClickedRemaining) = 0;
+        Player_Data(playerid, e_fPlayerThirstPerDrink) = 0.0;
+
+        inline const Due()
+        {
+            RemovePlayerAttachedObject(playerid, 0);
+        }
+        PlayerTimer_Start(playerid, 1500, false, using inline Due);
+    }
+    else
+    {
+        Player_Data(playerid, e_iPlayerDrinkClickedRemaining) = (clicked << 8) | maxclicks;
+
+        ApplyAnimation(playerid, "BAR", "DNK_STNDM_LOOP", 4.1, false, false, false, false, 0, false);
+    }
+
+    Player_SetThirst(playerid, Player_Thirst(playerid) - Player_Data(playerid, e_fPlayerThirstPerDrink));
+    Needs_UpdateTextDraws(playerid, false);
+    TextDrawShowForPlayer(playerid, g_tdNeedProgress[1]);
+
+    return 1;
+}

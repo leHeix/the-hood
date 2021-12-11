@@ -160,51 +160,24 @@ Player_LoadData(playerid)
     cache_get_value_name_int(0, !"ADMIN", Player_Rank(playerid));
     cache_get_value_name_int(0, !"PLAYED_TIME", Player_PlayedTime(playerid));
     cache_get_value_name_int(0, !"SETTINGS", g_rgePlayerData[playerid][e_iPlayerSettings]);
+    cache_get_value_name_int(0, !"PHONE_NUMBER", Player_PhoneNumber(playerid));
 
     g_rgePlayerData[playerid][e_iCurrentConnectionTime] = gettime();
 
+    for(new i = 1; i < MAX_WEAPON_SLOTS; ++i)
+    {
+        new weapon_and_ammo;
+        cache_get_value_name_int(0, va_return("SLOT_%d", i), weapon_and_ammo);
+        if(weapon_and_ammo)
+        {
+            new weaponid = (weapon_and_ammo & 0xFF);
+            new slot = Weapon_GetSlot(weaponid);
+            Player_WeaponSlot(playerid, slot)[e_iWeaponId] = weaponid;
+            Player_WeaponSlot(playerid, slot)[e_iWeaponAmmo] = (weapon_and_ammo >> 8);
+        }
+    }
+    
     cache_unset_active();
 
-    return 1;
-}
-
-Player_Vomit(playerid)
-{
-    Bit_Set(Player_Flags(playerid), PFLAG_IS_PUKING, true);
-
-    new Float:x, Float:y, Float:z;
-    GetPlayerPos(playerid, x, y, z);
-    SetPlayerFacingAngle(playerid, 0.0);
-    ApplyAnimation(playerid, "FOOD", "EAT_VOMIT_P", 4.0, false, false, false, true, 0);
-    PlayerPlaySound(playerid, 1, 0.0, 0.0, 0.0);
-    PlayerPlaySound(playerid, 1169, 0.0, 0.0, 0.0);
-
-    inline const StartPuking()
-    {
-        new puke_obj = CreateObject(18722, x + 0.355, y - 0.116, z - 1.6, 0.0, 0.0, 0.0);
-
-        inline const AnimDone()
-        {
-            Bit_Set(Player_Flags(playerid), PFLAG_IS_PUKING, false);
-            DestroyObject(puke_obj);
-            ClearAnimations(playerid);
-            PlayerPlaySound(playerid, 0, 0.0, 0.0, 0.0);
-        }
-        PlayerTimer_Start(playerid, 3500, false, using inline AnimDone);
-    }
-    PlayerTimer_Start(playerid, 4000, false, using inline StartPuking);
-}
-
-Player_SetHunger(playerid, Float:hunger)
-{
-    // clamp floating-point values
-    Player_Hunger(playerid) = (hunger <= 0.0 ? 0.0 : (hunger >= 100.0 ? 100.0 : hunger));
-    return 1;
-}
-
-Player_SetThirst(playerid, Float:thirst)
-{
-    // clamp floating-point-values
-    Player_Thirst(playerid) = (thirst <= 0.0 ? 0.0 : (thirst >= 100.0 ? 100.0 : thirst));
     return 1;
 }

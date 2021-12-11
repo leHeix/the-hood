@@ -71,7 +71,7 @@
 
 #define DEBUG_MODE 1
 
-#if DEBUG_MODE
+#if defined DEBUG_MODE
     #pragma option -d3
 #else
     #pragma option -d0 -O1
@@ -171,6 +171,7 @@ DEFINE_HOOK_REPLACEMENT__(OnPlayer, OP);
 #include "player/keygame/header.pwn"
 #include "player/inventory/header.pwn"
 #include "player/cellphone/header.pwn"
+#include "player/weapons/header.pwn"
 
 // Functions
 ///////////////
@@ -192,6 +193,7 @@ DEFINE_HOOK_REPLACEMENT__(OnPlayer, OP);
 #include "player/keygame/functions.pwn"
 #include "player/inventory/functions.pwn"
 #include "player/cellphone/functions.pwn"
+#include "player/weapons/functions.pwn"
 
 // Callbacks
 ///////////////
@@ -213,6 +215,7 @@ DEFINE_HOOK_REPLACEMENT__(OnPlayer, OP);
 #include "player/needs/callbacks.pwn"
 #include "player/auth/callbacks.pwn"
 #include "player/keygame/callbacks.pwn"
+#include "player/inventory/callbacks.pwn"
 #include "server/jobs/callbacks.pwn"
 #include "server/jobs/gunman/callbacks.pwn"
 
@@ -226,6 +229,17 @@ public OnGameModeInit()
 {
     CA_Init();
 
+    return 1;
+}
+
+CMD:w(playerid, const params[])
+{
+    extract params -> new weaponid, ammo = 32767; else {
+        return SendClientMessage(playerid, -1, "/w <weaponid> [ammo]");
+    }
+
+    Player_GiveWeapon(playerid, weaponid, ammo);
+    
     return 1;
 }
 

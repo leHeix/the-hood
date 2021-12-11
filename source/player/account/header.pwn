@@ -52,7 +52,9 @@ enum ePlayerData {
 	e_iPlayerPausedTime,
 
     e_iPlayerEatCount,
-    e_iPlayerPukeTick
+    e_iPlayerPukeTick,
+    Float:e_fPlayerThirstPerDrink,
+    e_iPlayerDrinkClickedRemaining
 };
 
 enum {
@@ -65,6 +67,8 @@ enum {
     PFLAG_CAN_USE_SHOP_BUTTONS,
     PFLAG_IS_PUKING,
     PFLAG_ON_AUTO_DEALERSHIP,
+    PFLAG_HAS_DRINK_ON_HANDS,
+    PFLAG_CHUFFING_A_FAT_DART,
 
 	MAX_PLAYER_FLAGS
 };
@@ -100,6 +104,7 @@ new
 #define Player_PlayedTime(%0) (g_rgePlayerData[(%0)][e_iPlayedTime])
 #define Player_PlayedLocalTime(%0) ((gettime() - g_rgePlayerData[(%0)][e_iCurrentConnectionTime]) + g_rgePlayerData[(%0)][e_iPlayedTime] - g_rgePlayerData[(%0)][e_iPlayerPausedTime])
 #define Player_Settings(%0) (g_rgePlayerData[(%0)][e_iPlayerSettings])
+#define Player_Data(%0,%1) (g_rgePlayerData[(%0)][(%1)])
 
 forward OnPlayerDataFetched(playerid);
 forward OnPlayerDataLoaded(playerid);
