@@ -170,10 +170,7 @@ Player_LoadData(playerid)
         cache_get_value_name_int(0, va_return("SLOT_%d", i), weapon_and_ammo);
         if(weapon_and_ammo)
         {
-            new weaponid = (weapon_and_ammo & 0xFF);
-            new slot = Weapon_GetSlot(weaponid);
-            Player_WeaponSlot(playerid, slot)[e_iWeaponId] = weaponid;
-            Player_WeaponSlot(playerid, slot)[e_iWeaponAmmo] = (weapon_and_ammo >> 8);
+            Player_GiveWeapon(playerid, (weapon_and_ammo & 0xFF), (weapon_and_ammo << 8), false);
         }
     }
     

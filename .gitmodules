@@ -4,3 +4,9 @@
 [submodule "compiler/include/tdw"]
 	path = compiler/include/tdw
 	url = https://github.com/tdworg/samp-include-vehicle
+[submodule "plugin_src/lib/samp-sdk"]
+	path = plugin_src/lib/samp-sdk
+	url = https://github.com/maddinat0r/samp-plugin-sdk
+[submodule "plugin_src/lib/urmem"]
+	path = plugin_src/lib/urmem
+	url = https://github.com/katursis/urmem

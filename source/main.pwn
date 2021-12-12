@@ -225,6 +225,8 @@ DEFINE_HOOK_REPLACEMENT__(OnPlayer, OP);
 #include "server/vehicles/commands.pwn"
 #include "player/needs/commands.pwn"
 
+public const THE_HOOD__ = 1;
+
 public OnGameModeInit()
 {
     CA_Init();

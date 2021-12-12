@@ -10,3 +10,8 @@ server_log.txt
 crashinfo.txt
 /scriptfiles/*
 !/scriptfiles/schema.sql
+
+.vs
+*.pdb
+plugins/server.cfg
+plugin_src/out
