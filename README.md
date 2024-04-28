@@ -1,3 +1,5 @@
+this is trash bruh 😭😭😭 making this public since the code has been leaked for some time anyways
+
 # The Hood
 Gang-based RPG gamemode for SA-MP  
 
