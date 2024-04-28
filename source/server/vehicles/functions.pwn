@@ -84,7 +84,6 @@ Speedometer_Update(playerid)
     new slashes = clamp(((max_speed_percentage * SPEED_MAX_SLASHES) / 100), 0, SPEED_MAX_SLASHES);
 
     // what the fuck
-    // holy nigger shit
     new 
         td_string[75],
         i = 0;
